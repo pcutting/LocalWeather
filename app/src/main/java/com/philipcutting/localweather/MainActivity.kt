@@ -32,7 +32,9 @@ class MainActivity : AppCompatActivity() {
 
         var currentWeather:CurrentWeather? = null
 
-        NetworkCurrentWeather.getCurrentWeatherItem{currentWeather}
+        NetworkCurrentWeather.getCurrentWeatherItem{weather ->
+            currentWeather = weather
+        }
         Log.d("MainActivity", "currentWeather: ${currentWeather.toString()}")
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
