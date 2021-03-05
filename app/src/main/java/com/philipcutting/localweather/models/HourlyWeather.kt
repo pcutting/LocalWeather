@@ -7,4 +7,6 @@ https://openweathermap.org/api/hourly-forecast
 
 */
 
-data class HourlyWeather()
+data class HourlyWeather(
+        var id: String
+)

@@ -5,11 +5,14 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.*
 import com.philipcutting.localweather.databinding.ActivityMainBinding
+import com.philipcutting.localweather.models.CurrentWeather
+import com.philipcutting.localweather.networking.NetworkCurrentWeather
 
 
 class MainActivity : AppCompatActivity() {
@@ -27,6 +30,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
        //binding.primaryFragmentForWeatherFragments.
 
+        var currentWeather:CurrentWeather? = null
+
+        NetworkCurrentWeather.getCurrentWeatherItem{currentWeather}
+        Log.d("MainActivity", "currentWeather: ${currentWeather.toString()}")
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 

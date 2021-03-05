@@ -1,7 +1,5 @@
 package com.philipcutting.localweather.models
 
-import com.google.android.gms.location.LocationResult
-
 /**
 api.openweathermap.org/data/2.5/forecast/daily?lat={lat}&lon={lon}&cnt={cnt}&appid={API key}
 
@@ -56,13 +54,9 @@ list.pop Probability of precipitation
  */
 
 data class DailyWeather(
-    val location: LocationResult? = null,
-    val weatherArray : MutableList<WeatherUnit> = mutableListOf())
+        val id : String
+)
 {
-    fun addWeatherReportItem(weatherUnit: WeatherUnit) {
-        weatherArray.add(weatherUnit)
-    }
-
-
+//
 }
 
