@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Local Weather</string>
+    <string name="today">Today</string>
+    <string name="weekly">Weekly</string>
+    <string name="currently">Currently</string>
+    <string name="cloudy">Cloudy</string>
+
+    <string name="settings">Settings</string>
+    <string name="continuous">Continuous</string>
+    <string name="location">location</string>
+    <string name="time">Time</string>
+    <string name="warning">Warning</string>
+
+    <string name="permissions_needed">Permissions are needed.</string>
+    <string name="weather_condition_image">weather condition image</string>
+
+
+</resources>
