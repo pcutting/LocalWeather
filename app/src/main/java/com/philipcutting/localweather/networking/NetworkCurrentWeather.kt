@@ -32,7 +32,8 @@ object NetworkCurrentWeather {
 
     val currentWeatherQueryMap = hashMapOf<String,String>(
             "lon" to testXAxis.toString(),
-            "lat" to testYAxis.toString()
+            "lat" to testYAxis.toString(),
+            "appid" to APIKey
     )
 
     private val currentWeatherUrl = "http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=$APIKey"
