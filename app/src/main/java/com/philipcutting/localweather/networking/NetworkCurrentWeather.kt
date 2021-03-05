@@ -40,7 +40,8 @@ object NetworkCurrentWeather {
         get() {
             Log.d(TAG, "testing currentWeatherApi in NetworkCurrentWeather.")
             return Retrofit.Builder()
-                .baseUrl(currentWeatherUrl)
+                    //Temp const string.
+                .baseUrl("api.openweathermap.org/data/2.5/weather?lat=42.694492&lon=23.321964&appid=$56786491fcb4331ffe593f9ff0b28cd1")
                 .client(client)
                 .addConverterFactory(MoshiConverterFactory.create())
                 .build()
@@ -48,14 +49,14 @@ object NetworkCurrentWeather {
         }
 
 
-    fun getCurrentWeatherItem(onSuccess: (CurrentWeather?) -> Unit) {
+    fun getCurrentWeather(onSuccess: (CurrentWeather?) -> Unit) {
         if(currentWeather != null) {
             onSuccess(currentWeather)
         }
-        currentWeatherApi.getCurrentWeather().enqueue(CurrentWeatherCallback(onSuccess))
+        currentWeatherApi.getCurrentWeatherItem().enqueue(CurrentWeatherCallback(onSuccess))
     }
 
-    private class CurrentWeatherCallback(
+    class CurrentWeatherCallback(
         private val onSuccess: (CurrentWeather?) -> Unit
     ): Callback<CurrentWeatherItem> {
 
@@ -66,11 +67,9 @@ object NetworkCurrentWeather {
             val currentWeatherItemNetwork = response.body()
                 ?.toCurrentWeather()
                 ?: null
-
             currentWeather = currentWeatherItemNetwork
             onSuccess(currentWeather)
             Log.d(TAG, "onResponse Network, $currentWeather")
-
         }
 
         override fun onFailure(call: Call<CurrentWeatherItem?>, t: Throwable) {

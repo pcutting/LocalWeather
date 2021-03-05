@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         var currentWeather:CurrentWeather? = null
 
-        NetworkCurrentWeather.getCurrentWeatherItem{weather ->
+        NetworkCurrentWeather.getCurrentWeather{weather ->
             currentWeather = weather
         }
         Log.d("MainActivity", "currentWeather: ${currentWeather.toString()}")
