@@ -30,6 +30,11 @@ object NetworkCurrentWeather {
     private var lon = testXAxis
     private var lat = testYAxis
 
+    val currentWeatherQueryMap = hashMapOf<String,String>(
+            "lon" to testXAxis.toString(),
+            "lat" to testYAxis.toString()
+    )
+
     private val currentWeatherUrl = "http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=$APIKey"
 
     private var currentWeather: CurrentWeather? = null
@@ -39,13 +44,15 @@ object NetworkCurrentWeather {
     private val currentWeatherApi : CurrentWeatherApi
         get() {
             Log.d(TAG, "testing currentWeatherApi in NetworkCurrentWeather.")
-            return Retrofit.Builder()
+            var retroBuilder =  Retrofit.Builder()
                     //Temp const string.
-                .baseUrl("api.openweathermap.org/data/2.5/weather?lat=42.694492&lon=23.321964&appid=$56786491fcb4331ffe593f9ff0b28cd1")
+                .baseUrl("http://api.openweathermap.org/data/2.5/")
                 .client(client)
                 .addConverterFactory(MoshiConverterFactory.create())
                 .build()
                 .create(CurrentWeatherApi::class.java)
+
+            return retroBuilder
         }
 
 
@@ -53,7 +60,9 @@ object NetworkCurrentWeather {
         if(currentWeather != null) {
             onSuccess(currentWeather)
         }
-        currentWeatherApi.getCurrentWeatherItem().enqueue(CurrentWeatherCallback(onSuccess))
+        currentWeatherApi
+                .getCurrentWeatherItem(currentWeatherQueryMap)
+                .enqueue(CurrentWeatherCallback(onSuccess))
     }
 
     class CurrentWeatherCallback(
