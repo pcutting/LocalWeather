@@ -15,16 +15,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 /**
 api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
 
-Parameters
-lat, lon	required	Geographical coordinates (latitude, longitude)
-appid	required	Your unique API key (you can always find it on your account page under the "API key" tab)
-mode	optional	Response format. Possible values are xml and html. If you don't use the mode parameter format is JSON by default. Learn more
-units	optional	Units of measurement. standard, metric and imperial units are available. If you do not use the units parameter, standard units will be applied by default. Learn more
-lang	optional	You can use this parameter to get the output in your language. Learn more
-Examples of API calls
-
 api.openweathermap.org/data/2.5/weather?lat=35&lon=139&appid={API key}
-
  */
 
 object NetworkCurrentWeather {
@@ -32,13 +23,12 @@ object NetworkCurrentWeather {
 
     private val APIKey = "56786491fcb4331ffe593f9ff0b28cd1"
 
-
     //sofia
     private val testXAxis = 42.694492
     private val testYAxis = 23.321964
 
-    private var lon = testXAxis  // {x} Number of x tile coordinate
-    private var lat = testYAxis  // {y} number of y tile coordinate
+    private var lon = testXAxis
+    private var lat = testYAxis
 
     private val currentWeatherUrl = "http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=$APIKey"
 
@@ -73,7 +63,6 @@ object NetworkCurrentWeather {
             call: Call<CurrentWeatherItem>,
             response: Response<CurrentWeatherItem>
         ) {
-            //val currentWeatherItem = response.body()?.currentWeatherItem?.map {it.toCurrentWeather}
             val currentWeatherItemNetwork = response.body()
                 ?.toCurrentWeather()
                 ?: null
@@ -87,8 +76,6 @@ object NetworkCurrentWeather {
         override fun onFailure(call: Call<CurrentWeatherItem?>, t: Throwable) {
             Log.d(TAG, "Error on response from server.")
         }
-
-
     }
 
     private fun CurrentWeatherItem.toCurrentWeather(): CurrentWeather {
@@ -133,26 +120,8 @@ object NetworkCurrentWeather {
             id = id,
             name = name,
             cod = cod
-
-
         )
     }
-
-//    private fun CurrentWeather.toCoord(): Coordinate {
-//        return Coord(
-//            lon = lon,
-//            lat = lat
-//        )
-//    }
-
-//    private fun  CurrentWeather.toWeather(): Weather {
-//        return Weather(
-//            id = id,
-//            main = C ,
-//            description = description,
-//            icon = icon
-//        )
-//    }
 }
 
 
