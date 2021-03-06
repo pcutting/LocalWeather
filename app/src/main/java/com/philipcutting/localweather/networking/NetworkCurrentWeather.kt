@@ -33,6 +33,7 @@ object NetworkCurrentWeather {
     val currentWeatherQueryMap = hashMapOf<String,String>(
             "lon" to testXAxis.toString(),
             "lat" to testYAxis.toString(),
+            "units" to "imperial",
             "appid" to APIKey
     )
 
@@ -46,7 +47,6 @@ object NetworkCurrentWeather {
         get() {
             Log.d(TAG, "testing currentWeatherApi in NetworkCurrentWeather.")
             var retroBuilder =  Retrofit.Builder()
-                    //Temp const string.
                 .baseUrl("http://api.openweathermap.org/")
                 .client(client)
                 .addConverterFactory(MoshiConverterFactory.create())
