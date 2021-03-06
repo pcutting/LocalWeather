@@ -30,11 +30,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
        //binding.primaryFragmentForWeatherFragments.
 
-        var currentWeather:CurrentWeather? = null
 
-        NetworkCurrentWeather.getCurrentWeather{weather ->
-            currentWeather = weather
+        var currentWeather:CurrentWeather? = null
+//
+        NetworkCurrentWeather.getCurrentWeather{current ->
+            currentWeather = current
         }
+
+
         Log.d("MainActivity", "currentWeather: ${currentWeather.toString()}")
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)

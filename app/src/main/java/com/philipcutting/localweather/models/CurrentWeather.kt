@@ -114,7 +114,7 @@ data class Clouds (
 )
 
 data class Sys (
-    val type: Int,
+    val typeOfWeather: Int,
     val id: Int,
     val message: String,
     val country: String,

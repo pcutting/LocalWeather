@@ -6,19 +6,19 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class CurrentWeatherItem(
-    @Json(name = "coord") val coordinate: Coordinate,
-    @Json(name = "weather") val weather: MutableList<Weather>,
-    @Json(name = "base") val base: String,
-    @Json(name = "main") val mainStats: MainStats,
-    @Json(name = "visibility") val visibilityFactor: Int, // as "visibility"
-    @Json(name = "wind") val wind: Wind,
-    @Json(name = "clouds") val clouds: Clouds,
-    @Json(name = "dt") val dt: Int,   // time of data collection.
-    @Json(name = "sys") val sys: Sys,
-    @Json(name = "timezone") val timezone: Int,  // Shift in seconds from UTC
-    @Json(name = "id") val id: Int,
-    @Json(name = "name") val name: String,
-    @Json(name = "cod") val cod: Int   // internal parameter
+        @Json(name = "coord") val coordinate: Coordinate,
+        @Json(name = "weather") val weather: MutableList<Weather>,
+        @Json(name = "base") val base: String,
+        @Json(name = "main") val mainStats: MainStats,
+        @Json(name = "visibility") val visibilityFactor: Int, // as "visibility"
+        @Json(name = "wind") val wind: Wind,
+        @Json(name = "clouds") val clouds: Clouds,
+        @Json(name = "dt") val dt: Int,   // time of data collection.
+        @Json(name = "sys") val sys: Sys,
+        @Json(name = "timezone") val timezone: Int,  // Shift in seconds from UTC
+        @Json(name = "id") val id: Int,
+        @Json(name = "name") val name: String,
+        @Json(name = "cod") val cod: Int   // internal parameter
 )
 
 @JsonClass(generateAdapter = true)
@@ -35,7 +35,7 @@ data class Weather(
     @Json(name = "icon") val icon: String
 )
 
-// ** As "Main" for name.
+// ** As "main" for json feed.
 @JsonClass(generateAdapter = true)
 data class MainStats(
     @Json(name = "temp") val temp : Double,
@@ -59,7 +59,7 @@ data class Clouds (
 
 @JsonClass(generateAdapter = true)
 data class Sys (
-    @Json(name = "type") val type: Int,
+    @Json(name = "type") val typeOfWeather: Int,
     @Json(name = "id") val id: Int,
     @Json(name = "message") val message: String,
     @Json(name = "country") val country: String,

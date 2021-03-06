@@ -30,16 +30,15 @@ object NetworkCurrentWeather {
     private var lon = testXAxis
     private var lat = testYAxis
 
-    val currentWeatherQueryMap = hashMapOf<String,String>(
+    private val currentWeatherQueryMap = hashMapOf<String,String>(
             "lon" to testXAxis.toString(),
             "lat" to testYAxis.toString(),
             "units" to "imperial",
             "appid" to APIKey
     )
 
-    private val currentWeatherUrl = "http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=$APIKey"
 
-    private var currentWeather: CurrentWeather? = null
+    var currentWeather: CurrentWeather? = null
 
     private val client = OkHttpClient()
 
@@ -47,13 +46,13 @@ object NetworkCurrentWeather {
         get() {
             Log.d(TAG, "testing currentWeatherApi in NetworkCurrentWeather.")
             var retroBuilder =  Retrofit.Builder()
-                .baseUrl("http://api.openweathermap.org/")
+                .baseUrl("http://api.openweathermap.org/data/2.5/")
                 .client(client)
                 .addConverterFactory(MoshiConverterFactory.create())
                 .build()
                 .create(CurrentWeatherApi::class.java)
 
-            Log.d(TAG, "retoBuilder: ${retroBuilder.toString()}")
+            Log.d(TAG, "retoBuilder:  ${retroBuilder.toString()}  ; client ${client}")
             return retroBuilder
         }
 
@@ -65,6 +64,8 @@ object NetworkCurrentWeather {
         currentWeatherApi
                 .getCurrentWeatherItem(currentWeatherQueryMap)
                 .enqueue(CurrentWeatherCallback(onSuccess))
+
+        Log.d(TAG, "getCurrentWeather end: ${currentWeatherApi.toString()}")
     }
 
     class CurrentWeatherCallback(
@@ -75,16 +76,18 @@ object NetworkCurrentWeather {
             call: Call<CurrentWeatherItem>,
             response: Response<CurrentWeatherItem>
         ) {
+            Log.d(TAG, "onResponse Network Url : ${response.raw().toString()}")
             val currentWeatherItemNetwork = response.body()
                 ?.toCurrentWeather()
                 ?: null
             currentWeather = currentWeatherItemNetwork
             onSuccess(currentWeather)
-            Log.d(TAG, "onResponse Network, $currentWeather")
+            Log.d(TAG, "2.onResponse Network, $currentWeather; Url : ${response.raw().toString()}")
         }
 
         override fun onFailure(call: Call<CurrentWeatherItem?>, t: Throwable) {
-            Log.d(TAG, "Error on response from server.")
+
+            Log.d(TAG, "Error on response from server. $t")
         }
     }
 
@@ -120,7 +123,7 @@ object NetworkCurrentWeather {
             ),
             dt = dt,
             sys = com.philipcutting.localweather.models.Sys(
-                type = sys.type,
+                typeOfWeather = sys.typeOfWeather,
                 id = sys.id,
                 message = sys.message,
                 country = sys.country,
