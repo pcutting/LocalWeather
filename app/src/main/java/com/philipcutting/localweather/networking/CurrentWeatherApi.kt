@@ -6,7 +6,7 @@ import retrofit2.http.QueryMap
 
 interface CurrentWeatherApi {
 
-    @GET("weather")
+    @GET("data/2.5/weather?")
     fun getCurrentWeatherItem(@QueryMap currentWeatherQueryMap: HashMap<String, String>): Call<CurrentWeatherItem>
 
 }

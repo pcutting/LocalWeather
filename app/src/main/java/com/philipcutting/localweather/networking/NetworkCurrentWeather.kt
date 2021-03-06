@@ -47,12 +47,13 @@ object NetworkCurrentWeather {
             Log.d(TAG, "testing currentWeatherApi in NetworkCurrentWeather.")
             var retroBuilder =  Retrofit.Builder()
                     //Temp const string.
-                .baseUrl("http://api.openweathermap.org/data/2.5/")
+                .baseUrl("http://api.openweathermap.org/")
                 .client(client)
                 .addConverterFactory(MoshiConverterFactory.create())
                 .build()
                 .create(CurrentWeatherApi::class.java)
 
+            Log.d(TAG, "retoBuilder: ${retroBuilder.toString()}")
             return retroBuilder
         }
 
@@ -88,17 +89,18 @@ object NetworkCurrentWeather {
     }
 
     private fun CurrentWeatherItem.toCurrentWeather(): CurrentWeather {
-        return CurrentWeather(
+        val toCurrentWeather = CurrentWeather(
             coordinate = Coordinate(
                 coordinate.lon,
                 coordinate.lat
             ),
-            weather = com.philipcutting.localweather.models.Weather(
-                id=id,
-                main = weather.main,
-                description = weather.description,
-                icon = weather.icon
-                ),
+            weather = mutableListOf(
+                com.philipcutting.localweather.models.Weather(
+                    id=weather.first().id,
+                    mainCondition = weather.first().mainCondition,
+                    description = weather.first().description,
+                    icon = weather.first().icon
+                )),
             base = base,
             mainStats = com.philipcutting.localweather.models.MainStats(
                temp = mainStats.temp,
@@ -130,6 +132,9 @@ object NetworkCurrentWeather {
             name = name,
             cod = cod
         )
+
+        //taken out of inline to make debugging easier.
+        return toCurrentWeather
     }
 }
 

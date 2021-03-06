@@ -1,6 +1,7 @@
 package com.philipcutting.localweather.models
 
 
+
 /**
  *
 
@@ -66,19 +67,19 @@ cod Internal parameter
 
 
 data class CurrentWeather(
-    val coordinate: Coordinate,
-    val weather: Weather,
-    val base: String,
-    val mainStats: MainStats,
-    val visibilityFactor: Int, // as "visibility"
-    val wind: Wind,
-    val clouds: Clouds,
-    val dt: Int,   // time of data collection.
-    val sys: Sys,
-    val timezone: Int,  // Shift in seconds from UTC
-    val id: Int,
-    val name: String,
-    val cod: Int   // internal parameter
+        val coordinate: Coordinate,
+        val weather:  MutableList<Weather>,
+        val base: String,
+        val mainStats: MainStats,
+        val visibilityFactor: Int, // as "visibility"
+        val wind: Wind,
+        val clouds: Clouds,
+        val dt: Int,   // time of data collection.
+        val sys: Sys,
+        val timezone: Int,  // Shift in seconds from UTC
+        val id: Int,
+        val name: String,
+        val cod: Int   // internal parameter
 )
 
  data class Coordinate(
@@ -88,7 +89,7 @@ data class CurrentWeather(
 
  data class Weather(
     val id: Int,
-    val main: String,
+    val mainCondition: String,
     val description: String,
     val icon: String
  )
