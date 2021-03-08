@@ -5,6 +5,7 @@ import com.philipcutting.localweather.models.Coordinate
 import com.philipcutting.localweather.models.CurrentWeather
 
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -40,14 +41,24 @@ object NetworkCurrentWeather {
 
     var currentWeather: CurrentWeather? = null
 
-    private val client = OkHttpClient()
+    //private val client = OkHttpClient()
+    private val logger = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+    private val client = OkHttpClient.Builder().addInterceptor(logger)
+
+//    HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+//    logging.setLevel(Level.BASIC);
+//    OkHttpClient client = new OkHttpClient.Builder()
+//    .addInterceptor(logging)
+//    .build();
+
+
 
     private val currentWeatherApi : CurrentWeatherApi
         get() {
             Log.d(TAG, "testing currentWeatherApi in NetworkCurrentWeather.")
             var retroBuilder =  Retrofit.Builder()
                 .baseUrl("http://api.openweathermap.org/data/2.5/")
-                .client(client)
+                .client(client.build())
                 .addConverterFactory(MoshiConverterFactory.create())
                 .build()
                 .create(CurrentWeatherApi::class.java)
@@ -94,41 +105,41 @@ object NetworkCurrentWeather {
     private fun CurrentWeatherItem.toCurrentWeather(): CurrentWeather {
         val toCurrentWeather = CurrentWeather(
             coordinate = Coordinate(
-                coordinate.lon,
-                coordinate.lat
+                lon = coordinate?.lon,
+                lat = coordinate?.lat
             ),
-            weather = mutableListOf(
+            weather =
                 com.philipcutting.localweather.models.Weather(
-                    id=weather.first().id,
-                    mainCondition = weather.first().mainCondition,
-                    description = weather.first().description,
-                    icon = weather.first().icon
-                )),
+                    id=weather?.first()?.id,
+                    mainCondition = weather?.first()?.mainCondition,
+                    description = weather?.first()?.description,
+                    icon = weather?.first()?.icon
+                ),
             base = base,
             mainStats = com.philipcutting.localweather.models.MainStats(
-               temp = mainStats.temp,
-               feelsLike = mainStats.feelsLike,
-               tempMin = mainStats.tempMin,
-               tempMax = mainStats.tempMax,
-               pressure = mainStats.pressure,
-               humidity = mainStats.humidity
+               temp = mainStats?.temp,
+               feelsLike = mainStats?.feelsLike,
+               tempMin = mainStats?.tempMin,
+               tempMax = mainStats?.tempMax,
+               pressure = mainStats?.pressure,
+               humidity = mainStats?.humidity
             ),
             visibilityFactor = visibilityFactor,
             wind = com.philipcutting.localweather.models.Wind(
-                speed = wind.speed,
-                deg = wind.deg
+                speed = wind?.speed,
+                deg = wind?.deg
             ),
             clouds = com.philipcutting.localweather.models.Clouds(
-                all = clouds.all
+                all = clouds?.all
             ),
             dt = dt,
             sys = com.philipcutting.localweather.models.Sys(
-                typeOfWeather = sys.typeOfWeather,
-                id = sys.id,
-                message = sys.message,
-                country = sys.country,
-                sunrise = sys.sunrise,
-                sunset = sys.sunset
+                typeOfWeather = sys?.typeOfWeather,
+                id = sys?.id,
+                message = sys?.message,
+                country = sys?.country,
+                sunrise = sys?.sunrise,
+                sunset = sys?.sunset
             ),
             timezone = timezone,
             id = id,
@@ -137,6 +148,7 @@ object NetworkCurrentWeather {
         )
 
         //taken out of inline to make debugging easier.
+        Log.d(TAG, "Made a currentWeather from json : ${toCurrentWeather.toString()}")
         return toCurrentWeather
     }
 }

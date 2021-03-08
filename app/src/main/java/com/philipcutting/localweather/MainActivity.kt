@@ -32,16 +32,12 @@ class MainActivity : AppCompatActivity() {
 
 
         var currentWeather:CurrentWeather? = null
-//
         NetworkCurrentWeather.getCurrentWeather{current ->
             currentWeather = current
         }
-
-
         Log.d("MainActivity", "currentWeather: ${currentWeather.toString()}")
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-
         locationRequest = LocationRequest.create()
         locationRequest?.priority = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY
         locationRequest?.interval = (10 * 1000).toLong() // 10 seconds
