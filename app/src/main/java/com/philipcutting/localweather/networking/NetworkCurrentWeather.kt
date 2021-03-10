@@ -20,7 +20,7 @@ api.openweathermap.org/data/2.5/weather?lat=35&lon=139&appid={API key}
  */
 
 object NetworkCurrentWeather {
-    private val TAG = "NetworkWeather"
+    private val TAG = "NetworkCurrentWeather"
 
     private val APIKey = "56786491fcb4331ffe593f9ff0b28cd1"
 
@@ -38,20 +38,11 @@ object NetworkCurrentWeather {
             "appid" to APIKey
     )
 
-
+    //api.openweathermap.org/data/2.5/weather?lon=42.694492&units=imperial&lat=23.321964&appid=56786491fcb4331ffe593f9ff0b28cd1
     var currentWeather: CurrentWeather? = null
 
-    //private val client = OkHttpClient()
     private val logger = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
     private val client = OkHttpClient.Builder().addInterceptor(logger)
-
-//    HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-//    logging.setLevel(Level.BASIC);
-//    OkHttpClient client = new OkHttpClient.Builder()
-//    .addInterceptor(logging)
-//    .build();
-
-
 
     private val currentWeatherApi : CurrentWeatherApi
         get() {
