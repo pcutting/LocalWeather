@@ -8,6 +8,16 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/temp_test_modelView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@id/button_location"
+        app:layout_constraintTop_toTopOf="@id/button_location"
+        app:layout_constraintBottom_toBottomOf="@id/button_location"
+        android:layout_marginEnd="@dimen/standard_margin"
+        android:text="TextView" />
+
+    <TextView
         android:id="@+id/location_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,8 +37,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/location_text_view" />
 
-    <androidx.fragment.app.FragmentContainerView
+    <fragment
         android:id="@+id/primary_fragment__for_weather_fragments"
+        android:name="com.philipcutting.localweather.WeatherFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"

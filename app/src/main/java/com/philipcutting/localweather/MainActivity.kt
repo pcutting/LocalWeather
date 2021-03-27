@@ -5,14 +5,14 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.location.*
 import com.philipcutting.localweather.databinding.ActivityMainBinding
-import com.philipcutting.localweather.models.CurrentWeather
-import com.philipcutting.localweather.networking.NetworkCurrentWeather
+import com.philipcutting.localweather.models.CurrentWeatherReport
+import com.philipcutting.localweather.viewmodels.CurrentWeatherViewModel
 
 
 class MainActivity : AppCompatActivity() {
@@ -22,20 +22,39 @@ class MainActivity : AppCompatActivity() {
     private var locationCallback: LocationCallback? = null
     private val locationRequestCode = 1000
 
+    private lateinit var viewModel: CurrentWeatherViewModel
+    private lateinit var binding: ActivityMainBinding
+
+    private val TAG = "MainActivity"
+
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+
+        viewModel = ViewModelProvider(this)[CurrentWeatherViewModel::class.java]
+
 
         setContentView(binding.root)
        //binding.primaryFragmentForWeatherFragments.
 
+        binding.tempTestModelView.text = viewModel.testText
 
-        var currentWeather:CurrentWeather? = null
-        NetworkCurrentWeather.getCurrentWeather{current ->
-            currentWeather = current
-        }
-        Log.d("MainActivity", "currentWeather: ${currentWeather.toString()}")
+        //TODO test this, see what i was working on after getting livedata working.
+//        val deleteTempTestFieldForTestingLiveData = viewModel.currentWeatherReport.observe(this) {
+//            binding.tempTestModelView.text = viewModel.currentWeatherReport.value?.weather?.description
+//        }
+
+//        var currentWeather:CurrentWeather? = null
+//        NetworkCurrentWeather.getCurrentWeather{current ->
+//            currentWeather = current
+//        }
+//        Log.d("MainActivity", "currentWeather: ${currentWeather.toString()}")
+
+        var currentWeather: CurrentWeatherReport? = null
+//        NetworkOneCallAll.getOneCallWeather { currentWeather ->
+//            Log.d(TAG, "api call: $currentWeather" )
+//        }
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         locationRequest = LocationRequest.create()
@@ -75,6 +94,13 @@ class MainActivity : AppCompatActivity() {
             var location = getCurrentLocation()
             binding.locationTextView.text = "Updated : ${ location?.latitude.toString()}  ${location?.longitude.toString()}"
         }
+
+
+        //TODO add fragment stuff.
+
+
+
+
     }
 
     //request location

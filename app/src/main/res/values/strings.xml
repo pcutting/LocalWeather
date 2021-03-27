@@ -4,6 +4,12 @@
     <string name="weekly">Weekly</string>
     <string name="currently">Currently</string>
     <string name="cloudy">Cloudy</string>
+    <string name="rain">Rain</string>
+    <string name="drizzle">Drizzle</string>
+    <string name="thunder">Thunder storm</string>
+    <string name="snow">Snow</string>
+    <string name="atmosphere">Atmospheric conditions</string>
+    <string name="clear">Clear</string>
 
     <string name="settings">Settings</string>
     <string name="continuous">Continuous</string>

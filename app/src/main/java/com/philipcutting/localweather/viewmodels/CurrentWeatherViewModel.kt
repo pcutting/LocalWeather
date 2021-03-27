@@ -1,23 +1,19 @@
 package com.philipcutting.localweather.viewmodels
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.philipcutting.localweather.models.CurrentWeatherReport
+import com.philipcutting.localweather.networking.NetworkOneCallAll
 
 class CurrentWeatherViewModel : ViewModel() {
-//    private val currentWeather : MutableLiveData<CurrentWeather> by lazy {
-//        MutableLiveDate().also {
-//            loadCurrentWeather()
-//        }
-//    }
+    val testText = "Test text inside of currentWeatherViewModel class"
+    val currentWeatherReportLiveData = MutableLiveData<CurrentWeatherReport?>()
 
-//    fun getCurrentWeather() : LiveData<CurrentWeather>{
-//        return currentWeather
-//    }
-//
-//    private fun loadCurrentWeather() {
-//        NetworkCurrentWeather.getCurrentWeather { currentWeather -> Unit }
-//    }
-//}
-//
+    fun getCurrentWeather() {
+        //val currentWeather = NetworkOneCallAll.getOneCallWeather { currentWeatherReport.value }
+        currentWeatherReportLiveData.value = NetworkOneCallAll.getOneCallWeather { currentWeatherReportLiveData.value }
+        //currentWeatherReport.value = currentWeather
+    }
 
 
 }
