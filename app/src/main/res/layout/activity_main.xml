@@ -11,11 +11,10 @@
         android:id="@+id/temp_test_modelView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@id/button_location"
-        app:layout_constraintTop_toTopOf="@id/button_location"
-        app:layout_constraintBottom_toBottomOf="@id/button_location"
-        android:layout_marginEnd="@dimen/standard_margin"
-        android:text="TextView" />
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/location_text_view"
+        app:layout_constraintTop_toBottomOf="@+id/location_text_view" />
 
     <TextView
         android:id="@+id/location_text_view"
@@ -31,11 +30,10 @@
         android:id="@+id/button_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:text="Get Location button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/location_text_view" />
+        app:layout_constraintTop_toBottomOf="@+id/temp_test_modelView" />
 
     <fragment
         android:id="@+id/primary_fragment__for_weather_fragments"

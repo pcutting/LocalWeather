@@ -11,7 +11,6 @@ import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.location.*
 import com.philipcutting.localweather.databinding.ActivityMainBinding
-import com.philipcutting.localweather.models.CurrentWeatherReport
 import com.philipcutting.localweather.viewmodels.CurrentWeatherViewModel
 
 
@@ -31,32 +30,21 @@ class MainActivity : AppCompatActivity() {
     {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-
         viewModel = ViewModelProvider(this)[CurrentWeatherViewModel::class.java]
 
-
         setContentView(binding.root)
-       //binding.primaryFragmentForWeatherFragments.
 
+        //TODO: Temp for testing. Delete soon.
+        binding.buttonLocation.text = "test Live String & C.Weather in MainActivity."
+        binding.buttonLocation.setOnClickListener {
+            viewModel.getCurrentWeather()
+            viewModel.incrementTestString()
+        }
         binding.tempTestModelView.text = viewModel.testText
+        //TODO: End temp for testing
 
-        //TODO test this, see what i was working on after getting livedata working.
-//        val deleteTempTestFieldForTestingLiveData = viewModel.currentWeatherReport.observe(this) {
-//            binding.tempTestModelView.text = viewModel.currentWeatherReport.value?.weather?.description
-//        }
 
-//        var currentWeather:CurrentWeather? = null
-//        NetworkCurrentWeather.getCurrentWeather{current ->
-//            currentWeather = current
-//        }
-//        Log.d("MainActivity", "currentWeather: ${currentWeather.toString()}")
-
-        var currentWeather: CurrentWeatherReport? = null
-//        NetworkOneCallAll.getOneCallWeather { currentWeather ->
-//            Log.d(TAG, "api call: $currentWeather" )
-//        }
-
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+       mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         locationRequest = LocationRequest.create()
         locationRequest?.priority = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY
         locationRequest?.interval = (10 * 1000).toLong() // 10 seconds
@@ -83,24 +71,17 @@ class MainActivity : AppCompatActivity() {
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION),
                     locationRequestCode)
-
         }
         else
         {
             requestLocation()
         }
 
-        binding.buttonLocation.setOnClickListener {
-            var location = getCurrentLocation()
-            binding.locationTextView.text = "Updated : ${ location?.latitude.toString()}  ${location?.longitude.toString()}"
-        }
-
-
-        //TODO add fragment stuff.
-
-
-
-
+//        TODO, Testing code. remove soon.
+//        binding.buttonLocation.setOnClickListener {
+//            var location = getCurrentLocation()
+//            binding.locationTextView.text = "Updated : ${ location?.latitude.toString()}  ${location?.longitude.toString()}"
+//        }
     }
 
     //request location
