@@ -7,15 +7,13 @@ import com.philipcutting.localweather.networking.NetworkOneCallAll
 
 class CurrentWeatherViewModel : ViewModel() {
     val testText = "test text inside of vm"
+    private val mVCurrentWeatherReport : CurrentWeatherReport? = null
     val currentWeatherReportLiveData = MutableLiveData<CurrentWeatherReport?>()
     val testStringLiveData =  MutableLiveData<String>()
 
-
-
     fun getCurrentWeather() {
-        //val currentWeather = NetworkOneCallAll.getOneCallWeather { currentWeatherReport.value }
-        currentWeatherReportLiveData.value = NetworkOneCallAll.getOneCallWeather { currentWeatherReportLiveData.value }
-        //currentWeatherReport.value = currentWeather
+        NetworkOneCallAll.getOneCallWeather { mVCurrentWeatherReport -> mVCurrentWeatherReport}
+        currentWeatherReportLiveData.value = mVCurrentWeatherReport
     }
 
     fun incrementTestString(count: Int = 1){
