@@ -12,7 +12,10 @@ class CurrentWeatherViewModel : ViewModel() {
     val testStringLiveData =  MutableLiveData<String>()
 
     fun getCurrentWeather() {
-        NetworkOneCallAll.getOneCallWeather { mVCurrentWeatherReport -> mVCurrentWeatherReport}
+        NetworkOneCallAll
+                .getOneCallWeather {
+                    mVCurrentWeatherReport -> mVCurrentWeatherReport
+                }
         currentWeatherReportLiveData.value = mVCurrentWeatherReport
     }
 
@@ -22,6 +25,4 @@ class CurrentWeatherViewModel : ViewModel() {
         }
         testStringLiveData.value += "*".repeat(count)
     }
-
-
 }

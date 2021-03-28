@@ -38,8 +38,11 @@ object NetworkOneCallAll {
             dailyWeather,
             hourlyWeather)
 
-    private val logger = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY )
-    private val client = OkHttpClient.Builder().addInterceptor(logger)
+    private val logger = HttpLoggingInterceptor()
+            .setLevel(HttpLoggingInterceptor.Level.BODY )
+
+    private val client = OkHttpClient.Builder()
+            .addInterceptor(logger)
 
     private val oneCallApi : OneCallApi
         get(){
@@ -57,11 +60,14 @@ object NetworkOneCallAll {
     fun getOneCallWeather(
         onSuccess: (CurrentWeatherReport?) -> CurrentWeatherReport?
     )  {
-        oneCallApi.getOneCallWeatherItems(weatherQueryMap).enqueue(OneCallCallback(onSuccess))
+        oneCallApi
+                .getOneCallWeatherItems(weatherQueryMap)
+                .enqueue(OneCallCallback(onSuccess))
     }
 
     private class OneCallCallback(
-            private val onSuccess: (CurrentWeatherReport?) -> CurrentWeatherReport?
+            private val onSuccess:
+            (CurrentWeatherReport?) -> CurrentWeatherReport?
     ) : Callback<OneCallCurrentWeatherHourlyAndSevenDayForecastItems> {
         override fun onResponse(
                 call: Call<OneCallCurrentWeatherHourlyAndSevenDayForecastItems>,
@@ -72,7 +78,10 @@ object NetworkOneCallAll {
             onSuccess(currentWeather)
         }
 
-        override fun onFailure(call: Call<OneCallCurrentWeatherHourlyAndSevenDayForecastItems>, t: Throwable) {
+        override fun onFailure(
+                call: Call<OneCallCurrentWeatherHourlyAndSevenDayForecastItems>,
+                t: Throwable
+        ) {
             Log.d(TAG, "oOneCallCallback.onFailure : $t")
         }
     }
