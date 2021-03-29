@@ -11,6 +11,11 @@ class CurrentWeatherViewModel : ViewModel() {
     val currentWeatherReportLiveData = MutableLiveData<CurrentWeatherReport?>()
     val testStringLiveData =  MutableLiveData<String>()
 
+    // Use the currentWeatherReport held in the Network class.
+    // TODO TODO TODO
+
+
+
     fun getCurrentWeather() {
         NetworkOneCallAll
                 .getOneCallWeather {
