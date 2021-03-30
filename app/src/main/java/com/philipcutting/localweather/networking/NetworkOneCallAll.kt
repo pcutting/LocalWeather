@@ -10,10 +10,15 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.time.Instant
 
 object NetworkOneCallAll {
     private const val TAG = "NetworkOneCallAll"
     private const val APIKey = "56786491fcb4331ffe593f9ff0b28cd1"
+
+    private var testDebugTimeVariableEnteringGetLocalWeather = Instant.now()
+    private var testDebugTimeVariableLeavingOnResponse = Instant.now()
+
 
     //sofia, Bulgaria
     private const val testXAxis = 42.694492
@@ -60,6 +65,8 @@ object NetworkOneCallAll {
     fun getOneCallWeather(
         onSuccess: (CurrentWeatherReport?) -> CurrentWeatherReport?
     )  {
+        testDebugTimeVariableEnteringGetLocalWeather = Instant.now()
+
         oneCallApi
                 .getOneCallWeatherItems(weatherQueryMap)
                 .enqueue(OneCallCallback(onSuccess))
@@ -73,8 +80,9 @@ object NetworkOneCallAll {
                 call: Call<OneCallCurrentWeatherHourlyAndSevenDayForecastItems>,
                 response: Response<OneCallCurrentWeatherHourlyAndSevenDayForecastItems>
         ) {
-            val reports = response.body()?.toCurrent()
-            currentWeather = reports
+            currentWeather = response.body()?.toCurrent()
+            testDebugTimeVariableLeavingOnResponse = Instant.now()
+            Log.d(TAG,"onResponse {Time: ${testDebugTimeVariableLeavingOnResponse.toEpochMilli() - testDebugTimeVariableEnteringGetLocalWeather.toEpochMilli()  } : ${currentWeather}")
             onSuccess(currentWeather)
         }
 

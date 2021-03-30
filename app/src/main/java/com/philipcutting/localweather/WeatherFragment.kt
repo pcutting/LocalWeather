@@ -24,7 +24,6 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
             binding.dateTextView.text = "Updated: " +  it?.dt?.toLocalTime() ?: "Loading"
         }
         viewModel.getCurrentWeather()
-        viewModel.getCurrentWeather()
 
         //TODO testing code: Remove following section.
 

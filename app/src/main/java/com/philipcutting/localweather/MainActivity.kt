@@ -107,7 +107,6 @@ class MainActivity : AppCompatActivity() {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     requestLocation()
-
                 } else {
                     Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
                 }
