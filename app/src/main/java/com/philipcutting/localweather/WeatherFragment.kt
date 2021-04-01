@@ -1,10 +1,12 @@
 package com.philipcutting.localweather
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.philipcutting.localweather.databinding.FragmentWeatherBinding
+import com.philipcutting.localweather.models.WeatherConditions
 import com.philipcutting.localweather.viewmodels.CurrentWeatherViewModel
 
 class WeatherFragment : Fragment(R.layout.fragment_weather) {
@@ -18,15 +20,17 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
 
         viewModel = ViewModelProvider(this)[CurrentWeatherViewModel::class.java]
 
+        Log.d(TAG, "onViewCreated in WeatherFragment viewModel $viewModel")
         viewModel.currentWeatherReportLiveData.observe(viewLifecycleOwner){
             binding.currentWeatherConditionTextView.text = it?.weather?.description ?: "Loading Weather"
             binding.temperatureTextView.text = it?.temp?.toString() ?: "Loading"
             binding.dateTextView.text = "Updated: " +  it?.dt?.toLocalTime() ?: "Loading"
+
+            val currentCondition = WeatherConditions.getConditionFromCode(it?.weather?.id)
+            binding.weatherCurrentIcon.setImageResource(currentCondition.getImageResource(it?.dt, it?.temp, it))
         }
         viewModel.getCurrentWeather()
-
         //TODO testing code: Remove following section.
-
         binding.refreshButton.text = "Test Livedata String in frag"
         binding.refreshButton.setOnClickListener {
             viewModel.incrementTestString()

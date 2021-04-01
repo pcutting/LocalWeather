@@ -5,6 +5,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -37,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         //TODO: Temp for testing. Delete soon.
         binding.buttonLocation.text = "test Live String & C.Weather in MainActivity."
         binding.buttonLocation.setOnClickListener {
+            Log.d(TAG, "button pressed in main activity")
             viewModel.getCurrentWeather()
             viewModel.incrementTestString()
         }

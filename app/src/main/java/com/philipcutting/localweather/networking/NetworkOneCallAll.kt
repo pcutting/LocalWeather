@@ -2,7 +2,6 @@ package com.philipcutting.localweather.networking
 
 import android.util.Log
 import com.philipcutting.localweather.models.*
-import com.philipcutting.localweather.models.WeatherSegment
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -11,6 +10,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.time.Instant
+import com.philipcutting.localweather.networking.WeatherSegment as NetworkingWeatherSegment
 
 object NetworkOneCallAll {
     private const val TAG = "NetworkOneCallAll"
@@ -19,29 +19,22 @@ object NetworkOneCallAll {
     private var testDebugTimeVariableEnteringGetLocalWeather = Instant.now()
     private var testDebugTimeVariableLeavingOnResponse = Instant.now()
 
-
     //sofia, Bulgaria
-    private const val testXAxis = 42.694492
-    private const val testYAxis = 23.321964
+    private const val testLat = 42.694492
+    private const val testLon = 23.321964
 
-    private var lon = testXAxis
-    private var lat = testYAxis
+    private var lat = testLat
+    private var lon = testLon
 
     private val weatherQueryMap = hashMapOf(
             "lon" to lon.toString(),
             "lat" to lat.toString(),
             "units" to "imperial",
-            "exclude" to "minutely,alerts,hourly,daily",
+            "exclude" to "minutely,alerts",
             "appid" to APIKey
     )
 
-    var currentWeather: CurrentWeatherReport? = null
-    var dailyWeather: DailyWeatherReports? = null
-    var hourlyWeather: HourlyWeatherReports? = null
-    val combinedWeatherReport = CombinedWeatherReport(
-            currentWeather,
-            dailyWeather,
-            hourlyWeather)
+    var combinedWeatherReport : CombinedWeatherReport? = null
 
     private val logger = HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.BODY )
@@ -51,7 +44,7 @@ object NetworkOneCallAll {
 
     private val oneCallApi : OneCallApi
         get(){
-            Log.d(TAG, "onecallapi to weather")
+            Log.d(TAG, "oneCallAPI to weather")
             val retroBuilder = Retrofit.Builder()
                     .baseUrl("http://api.openweathermap.org/data/2.5/")
                     .client(client.build())
@@ -63,7 +56,7 @@ object NetworkOneCallAll {
         }
 
     fun getOneCallWeather(
-        onSuccess: (CurrentWeatherReport?) -> CurrentWeatherReport?
+            onSuccess: (CombinedWeatherReport?) -> Unit
     )  {
         testDebugTimeVariableEnteringGetLocalWeather = Instant.now()
 
@@ -74,40 +67,38 @@ object NetworkOneCallAll {
 
     private class OneCallCallback(
             private val onSuccess:
-            (CurrentWeatherReport?) -> CurrentWeatherReport?
-    ) : Callback<OneCallCurrentWeatherHourlyAndSevenDayForecastItems> {
+            (CombinedWeatherReport?) -> Unit
+    ) : Callback<OneCallWeatherItem> {
         override fun onResponse(
-                call: Call<OneCallCurrentWeatherHourlyAndSevenDayForecastItems>,
-                response: Response<OneCallCurrentWeatherHourlyAndSevenDayForecastItems>
+                call: Call<OneCallWeatherItem>,
+                response: Response<OneCallWeatherItem>
         ) {
-            currentWeather = response.body()?.toCurrent()
+            combinedWeatherReport = response.body()?.toCurrent()
             testDebugTimeVariableLeavingOnResponse = Instant.now()
-            Log.d(TAG,"onResponse {Time: ${testDebugTimeVariableLeavingOnResponse.toEpochMilli() - testDebugTimeVariableEnteringGetLocalWeather.toEpochMilli()  } : ${currentWeather}")
-            onSuccess(currentWeather)
+            Log.d(TAG,"onResponse {Time: ${testDebugTimeVariableLeavingOnResponse.toEpochMilli() - testDebugTimeVariableEnteringGetLocalWeather.toEpochMilli()  } : $combinedWeatherReport")
+            onSuccess(combinedWeatherReport)
         }
 
         override fun onFailure(
-                call: Call<OneCallCurrentWeatherHourlyAndSevenDayForecastItems>,
+                call: Call<OneCallWeatherItem>,
                 t: Throwable
         ) {
             Log.d(TAG, "oOneCallCallback.onFailure : $t")
         }
     }
 
-    private fun OneCallCurrentWeatherHourlyAndSevenDayForecastItems.toCurrent()
-    : CurrentWeatherReport
+    private fun OneCallWeatherItem.toCurrent()
+    : CombinedWeatherReport
     {
-        return CurrentWeatherReport(
+        return CombinedWeatherReport(
                 latitude = this.latitude,
                 longitude = this.longitude,
                 timezone = this.timezone,
                 timezoneOffset = this.timezoneOffset,
-
                 dt = WeatherUnit.convertTimeFromEpochInSecondsToLocalDataTimeType(
                     this.currentWeather?.dt ?: 0,
                     this.timezoneOffset ?: 0
                 ),
-
                 sunRise =  WeatherUnit.convertTimeFromEpochInSecondsToLocalDataTimeType(
                     this.currentWeather?.sunRise ?: 0,
                     this.timezoneOffset ?: 0),
@@ -125,17 +116,112 @@ object NetworkOneCallAll {
                 windSpeed = this.currentWeather?.windSpeed,
                 windGust = this.currentWeather?.windGust,
                 degreeWindDirection = this.currentWeather?.degreeWindDirection,
-                weather = WeatherSegment(
+                weather = AllWeatherSegment(
                     id = this.currentWeather?.weather?.firstOrNull()?.id,
                     mainTitle =  this.currentWeather?.weather?.firstOrNull()?.mainTitle,
                     description =  this.currentWeather?.weather?.firstOrNull()?.description,
                     icon =  this.currentWeather?.weather?.firstOrNull()?.icon
                 ),
                 rainVolume = this.currentWeather?.rainVolume,
-                snowVolume = this.currentWeather?.snowVolume
+                snowVolume = this.currentWeather?.snowVolume,
+                hourly =  listOfHourlyReports(this),
+                daily = listOfDailyReports(this)
         )
     }
 
+    private fun listOfDailyReports(item : OneCallWeatherItem?): List<Daily?> {
+        val listOfDailyReports = mutableListOf<Daily?>()
+        item?.dailyWeather?.forEach {
+            Daily(
+                    dt = WeatherUnit.convertTimeFromEpochInSecondsToLocalDataTimeType(
+                            it.dt ?: 0,
+                            0),
+                    sunRise =  WeatherUnit.convertTimeFromEpochInSecondsToLocalDataTimeType(
+                            it.sunRise ?: 0,
+                            0),
+                    sunSet =  WeatherUnit.convertTimeFromEpochInSecondsToLocalDataTimeType(
+                            it.sunSet ?: 0,
+                            0),
+
+//                    temp = Temperature(
+//                            it.temp?.day,
+//                            it.temp?.min,
+//                            it.temp?.max,
+//                            it.temp?.night,
+//                            it.temp?.evening,
+//                            it.temp?.morning
+//                    ),
+
+                    tempMax = it.temp?.max,
+                    tempMin = it.temp?.min,
+                    tempDay = it.temp?.day,
+                    tempEvening = it.temp?.evening,
+                    tempMorning = it.temp?.morning,
+                    tempNight = it.temp?.night,
+
+//                    feelsLike = FeelsLike(
+//                            it.feelsLike?.day,
+//                            it.feelsLike?.night,
+//                            it.feelsLike?.evening,
+//                            it.feelsLike?.morning
+//                    ),
+
+                    feelsLikeDay = it.feelsLike?.day,
+                    feelsLikeEvening = it.feelsLike?.evening,
+                    feelsLIkeMorning = it.feelsLike?.morning,
+                    feelsLikeNight = it.feelsLike?.night,
+
+                    pressure = it.pressure,
+                    humidity = it.humidity,
+                    dewPoint = it.dewPoint,
+                    uVIndex = it.uVIndex,
+                    cloudinessPercent = it.cloudinessPercent,
+                    windGust = it.windGust,
+                    windSpeed = it.windSpeed,
+                    degreeWindDirection = it.degreeWindDirection,
+                    weather = theWeatherSegment(it.weather?.first()),
+                    probabilityOfRain = it.probabilityOfRain,
+            )
+        }
+        return listOfDailyReports
+    }
+
+    private fun listOfHourlyReports(item : OneCallWeatherItem?): List<Hourly?> {
+        val listOfHourlyReports = mutableListOf<Hourly?>()
+        item?.hourlyWeathers?.forEach {
+            Hourly(
+                    dt = WeatherUnit.convertTimeFromEpochInSecondsToLocalDataTimeType(
+                            it.dt ?: 0,
+                            0),
+                    temp = it.temp,
+                    feelsLike = it.feelsLike,
+                    pressure = it.pressure,
+                    humidity = it.humidity,
+                    dewPoint = it.dewPoint,
+                    uVIndex = it.uVIndex,
+                    cloudinessPercent = it.cloudinessPercent,
+                    visibilityMeters = it.visibilityMeters,
+                    windGust = it.windGust,
+                    windSpeed = it.windSpeed,
+                    degreeWindDirection = it.degreeWindDirection,
+//                    rainVolume = it.rainVolume,
+//                    snowVolume = it.snowVolume,
+                    weather = theWeatherSegment(it.weather?.first()),
+            )
+        }
+        return listOfHourlyReports
+    }
+
+
+
+    private fun theWeatherSegment(
+            weatherSegment :NetworkingWeatherSegment?
+    ) =  AllWeatherSegment(
+            id = weatherSegment?.id,
+            mainTitle = weatherSegment?.mainTitle,
+            description = weatherSegment?.description,
+            icon = weatherSegment?.icon
+    )
 
 
 }

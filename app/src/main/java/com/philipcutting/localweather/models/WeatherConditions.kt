@@ -19,12 +19,13 @@ enum class WeatherConditions(
     THUNDER(R.string.thunder, (200..232).toList()),
     SNOW(R.string.snow,(600..622).toList()),
     ATMOSPHERE(R.string.atmosphere, (700..781).toList()),
-    CLEAR(R.string.clear, listOf(800));
+    CLEAR(R.string.clear, listOf(800)),
+    ERROR(R.string.error, listOf(0));
 
     fun getImageResource(
         time:LocalDateTime?,
         temperature: Double?,
-        currentWeather: CurrentWeatherReport?
+        currentWeather: CombinedWeatherReport?
     ) : Int {
         return when (this) {
             CLOUDY -> getCloudyImage(time, temperature, currentWeather)
@@ -34,14 +35,15 @@ enum class WeatherConditions(
             SNOW  -> getSnowyImage()
             THUNDER -> getThunderyImage()
             ATMOSPHERE -> getAtmosphericImage()
+            ERROR -> R.drawable.ic_error
         }
     }
 
     companion object {
-        fun getConditionFromCode(code: Int): WeatherConditions?{
-            return values().firstOrNull {
+        fun getConditionFromCode(code: Int?): WeatherConditions{
+            return  values().firstOrNull {
                 it.codes.contains(code)
-            }
+            } ?: ERROR
         }
     }
 }
@@ -58,50 +60,50 @@ private fun getSnowyImage(): Int {
     return  R.drawable.ic_snow
 }
 
-private fun getDrizzlyImage(time: LocalDateTime? , currentWeatherReport: CurrentWeatherReport?): Int {
+private fun getDrizzlyImage(time: LocalDateTime? , combinedWeatherReport: CombinedWeatherReport?): Int {
     return when{
-        isDay(time, currentWeatherReport)  -> R.drawable.ic_drizzle_day
+        isDay(time, combinedWeatherReport)  -> R.drawable.ic_drizzle_day
         else -> R.drawable.ic_drizzle_night
     }
 }
 
-private fun getRainyImage(currentWeatherReport: CurrentWeatherReport?): Int {
+private fun getRainyImage(combinedWeatherReport: CombinedWeatherReport?): Int {
     return when{
-        currentWeatherReport?.windSpeed != null && currentWeatherReport.windSpeed > 20.0  -> R.drawable.ic_rain_windy
+        combinedWeatherReport?.windSpeed != null && combinedWeatherReport.windSpeed > 20.0  -> R.drawable.ic_rain_windy
         else -> R.drawable.ic_rain
     }
 }
 
-private fun getClearImage(conditionTime:LocalDateTime?, currentWeatherReport: CurrentWeatherReport?): Int {
+private fun getClearImage(conditionTime:LocalDateTime?, combinedWeatherReport: CombinedWeatherReport?): Int {
     //TODO may have a bug with the date component here.
     val time = conditionTime ?: LocalDateTime.now()
-
-    val sunRiseRangeEnd = sunRise(currentWeatherReport)
+    val sunRiseRangeEnd = sunRise(combinedWeatherReport)
     val sunRiseRangeStart = sunRiseRangeEnd.minusMinutes(30)
 
     //Tried making these a range, but ranges for LocalDateTime didn't work.
-    val sunSetRangeStart = sunSet(currentWeatherReport)
+    val sunSetRangeStart = sunSet(combinedWeatherReport)
     val sunSetRangeEnd = sunSetRangeStart.plusMinutes(30)
 
     return when{
         time.isAfter(sunRiseRangeStart) && time.isBefore(sunRiseRangeEnd)-> R.drawable.ic_sunrise
         time.isAfter(sunSetRangeStart) && time.isBefore(sunSetRangeEnd) -> R.drawable.ic_sunset
-        isDay(time,currentWeatherReport) && isTwilight(time,currentWeatherReport)-> R.drawable.ic_sun_big
+        isDay(time,combinedWeatherReport) && isTwilight(time,combinedWeatherReport)-> R.drawable.ic_sun_big
         else -> R.drawable.ic_moon_clear
     }
 }
 
-private fun getCloudyImage(time:LocalDateTime?, temperature: Double?, currentWeatherReport: CurrentWeatherReport?): Int {
+private fun getCloudyImage(time:LocalDateTime?, temperature: Double?, combinedWeatherReport: CombinedWeatherReport?): Int {
     val freezing = 32.0
-    val workingTemp:Double = temperature
-        ?: if(currentWeatherReport?.temp != null) {
-            currentWeatherReport.temp
-        }else {
-            freezing+1
-        }
+
+    val workingTemp = when {
+        temperature != null -> temperature
+        combinedWeatherReport?.temp != null -> combinedWeatherReport.temp
+        else -> 33.0
+    }
+
     return when{
-        isDay(time,currentWeatherReport) && workingTemp <= freezing -> R.drawable.ic_cloudy_day_little_sun
-        isDay(time,currentWeatherReport) && workingTemp > freezing -> R.drawable.ic_cloudy_day_strong_sun
+        isDay(time,combinedWeatherReport) && workingTemp <= freezing -> R.drawable.ic_cloudy_day_little_sun
+        isDay(time,combinedWeatherReport) && workingTemp > freezing -> R.drawable.ic_cloudy_day_strong_sun
         workingTemp <= freezing -> R.drawable.ic_cloudy_day_little_sun
         workingTemp > freezing -> R.drawable.ic_cloudy_day_strong_sun
         else -> R.drawable.ic_cloud
@@ -111,9 +113,9 @@ private fun getCloudyImage(time:LocalDateTime?, temperature: Double?, currentWea
 //TODO consider modifying isDay, isTwilight to an enum of DAY,NIGHT, TWILIGHT_MORNING, TWILIGHT_EVENING
 //Twilight is 20-30 min, set it for 30 min here.
 //TWILIGHT : Morning (sunRise - 30 min)..SunRise.  Evening:sunSet..(sunSet+30 min)
-fun isTwilight(time: LocalDateTime?, currentWeatherReport: CurrentWeatherReport?): Boolean{
-    val sunRise = sunRise(currentWeatherReport)  // default to 6 am
-    val sunSet = sunSet(currentWeatherReport)   // default to 7 pm
+fun isTwilight(time: LocalDateTime?, combinedWeatherReport: CombinedWeatherReport?): Boolean{
+    val sunRise = sunRise(combinedWeatherReport)  // default to 6 am
+    val sunSet = sunSet(combinedWeatherReport)   // default to 7 pm
     val currentTime = time ?: LocalDateTime.now()
     val howLongIsTwilight = Duration.ofMinutes(30)
     return when {
@@ -127,17 +129,17 @@ fun isTwilight(time: LocalDateTime?, currentWeatherReport: CurrentWeatherReport?
 
 //private fun workingTime(time:LocalDateTime?) = time ?: 1200  //TODO make right.
 
-private fun sunRise(currentWeatherReport: CurrentWeatherReport?) =
-    currentWeatherReport?.sunRise ?: LocalDateTime.of(LocalDate.now(), LocalTime.of(6,30))  // TODO default to 6 am
+private fun sunRise(combinedWeatherReport: CombinedWeatherReport?) =
+    combinedWeatherReport?.sunRise ?: LocalDateTime.of(LocalDate.now(), LocalTime.of(6,30))  // TODO default to 6 am
 
-private fun sunSet(currentWeatherReport: CurrentWeatherReport?) =
-    currentWeatherReport?.sunSet ?: LocalDateTime.of(LocalDate.now(), LocalTime.of(18,30))  // TODO default to 10 pm
+private fun sunSet(combinedWeatherReport: CombinedWeatherReport?) =
+    combinedWeatherReport?.sunSet ?: LocalDateTime.of(LocalDate.now(), LocalTime.of(18,30))  // TODO default to 10 pm
 
-fun isDay(time: LocalDateTime?, currentWeatherReport: CurrentWeatherReport?): Boolean{
+fun isDay(time: LocalDateTime?, combinedWeatherReport: CombinedWeatherReport?): Boolean{
     val workingTime = time ?: LocalDateTime.now()
     return when {
 
-        workingTime.isAfter(sunRise(currentWeatherReport)) && workingTime.isAfter(sunSet(currentWeatherReport).minusMinutes(1)) -> {
+        workingTime.isAfter(sunRise(combinedWeatherReport)) && workingTime.isAfter(sunSet(combinedWeatherReport).minusMinutes(1)) -> {
             true
         }
         else -> false

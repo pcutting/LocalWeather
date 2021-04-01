@@ -26,7 +26,6 @@ data class CurrentWeatherReport(
         val snowVolume: Int?, //In mm metric
 )
 
-
 data class WeatherSegment(
     val id: Int?,
     val mainTitle: String?,

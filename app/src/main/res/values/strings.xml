@@ -19,6 +19,7 @@
 
     <string name="permissions_needed">Permissions are needed.</string>
     <string name="weather_condition_image">weather condition image</string>
+    <string name="error">Error</string>
 
 
 </resources>

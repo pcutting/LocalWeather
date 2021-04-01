@@ -6,6 +6,7 @@ import retrofit2.http.QueryMap
 
 interface OneCallApi {
     @GET("onecall")
-    fun getOneCallWeatherItems(@QueryMap weatherQueryMap: HashMap<String, String>): Call<OneCallCurrentWeatherHourlyAndSevenDayForecastItems>
+    //prefix with suspend ???
+    fun getOneCallWeatherItems(@QueryMap weatherQueryMap: HashMap<String, String>): Call<OneCallWeatherItem>
 
 }
