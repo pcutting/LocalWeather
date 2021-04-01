@@ -1,19 +1,25 @@
 package com.philipcutting.localweather
 
+import com.philipcutting.localweather.networking.OneCallWeatherItem
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
+import org.junit.Assert
+import org.junit.Test
+
 class NetworkOneCallAllUnitTests {
 
 
 
-//
-//    @Test
-//    fun `test url returns code 200 with given string`() {
-//        val moshi = Moshi.Builder().build()
-//        val adapter : JsonAdapter<OneCallWeatherItem> = moshi.adapter(OneCallWeatherItem::class.java)
-//        val weatherData = adapter.fromJson(testLocalJsonDataLong())
-//
-//
-//        Assert.assertEquals(801, weatherData?.currentWeather?.weather?.first()?.id)
-//    }
+
+    @Test
+    fun `test url returns code 200 with given string`() {
+        val moshi = Moshi.Builder().build()
+        val adapter : JsonAdapter<OneCallWeatherItem> = moshi.adapter(OneCallWeatherItem::class.java)
+        val weatherData = adapter.fromJson(testLocalJsonDataLong())
+
+
+        Assert.assertEquals(801, weatherData?.currentWeather?.weather?.first()?.id)
+    }
 
 }
 

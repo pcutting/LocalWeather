@@ -143,28 +143,12 @@ object NetworkOneCallAll {
                             it.sunSet ?: 0,
                             0),
 
-//                    temp = Temperature(
-//                            it.temp?.day,
-//                            it.temp?.min,
-//                            it.temp?.max,
-//                            it.temp?.night,
-//                            it.temp?.evening,
-//                            it.temp?.morning
-//                    ),
-
                     tempMax = it.temp?.max,
                     tempMin = it.temp?.min,
                     tempDay = it.temp?.day,
                     tempEvening = it.temp?.evening,
                     tempMorning = it.temp?.morning,
                     tempNight = it.temp?.night,
-
-//                    feelsLike = FeelsLike(
-//                            it.feelsLike?.day,
-//                            it.feelsLike?.night,
-//                            it.feelsLike?.evening,
-//                            it.feelsLike?.morning
-//                    ),
 
                     feelsLikeDay = it.feelsLike?.day,
                     feelsLikeEvening = it.feelsLike?.evening,
