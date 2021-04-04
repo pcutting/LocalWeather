@@ -23,28 +23,32 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
         Log.d(TAG, "onViewCreated in WeatherFragment viewModel $viewModel")
         viewModel.currentWeatherReportLiveData.observe(viewLifecycleOwner){
             binding.currentWeatherConditionTextView.text = it?.weather?.description ?: "Loading Weather"
+            binding.currentWeatherConditionTextView.text = it?.weather?.description ?: "Loading Weather"
             binding.temperatureTextView.text = it?.temp?.toString() ?: "Loading"
-            binding.dateTextView.text = "Updated: " +  it?.dt?.toLocalTime() ?: "Loading"
+            binding.dateTextView.text = "Updated: " +  it?.dt?.toLocalTime()
 
             val currentCondition = WeatherConditions.getConditionFromCode(it?.weather?.id)
             binding.weatherCurrentIcon.setImageResource(currentCondition.getImageResource(it?.dt, it?.temp, it))
         }
         viewModel.getCurrentWeather()
-        //TODO testing code: Remove following section.
-        binding.refreshButton.text = "Test Livedata String in frag"
+
         binding.refreshButton.setOnClickListener {
-            viewModel.incrementTestString()
-//            viewModel.getCurrentWeather()
-        }
-        binding.refreshButton2.text = "Test LiveData C.Weather"
-        binding.refreshButton2.setOnClickListener {
-            viewModel.getCurrentWeather()
-        }
-        viewModel.testStringLiveData.observe(viewLifecycleOwner){
-            binding.tempLiveDataString.text = it
+
+
         }
 
-        //TODO End testing code:
+        binding.hourlyButton.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container_hourly_and_daily, HourlyFragment())
+                    .commit()
+        }
+
+        binding.dailyButton.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container_hourly_and_daily, DailyFragment())
+
+        }
+
 
     }
 

@@ -11,18 +11,18 @@
         android:id="@+id/temperature_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/standard_margin"
+        android:layout_marginTop="@dimen/standard_margin"
         app:layout_constraintBottom_toTopOf="@+id/date_text_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/refresh_button2"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="Temperature" />
 
     <TextView
         android:id="@+id/date_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/standard_margin"
+        android:layout_marginTop="@dimen/standard_margin"
         app:layout_constraintBottom_toTopOf="@+id/time_text_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +33,7 @@
         android:id="@+id/time_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/standard_margin"
+        android:layout_marginTop="@dimen/standard_margin"
         app:layout_constraintBottom_toTopOf="@+id/weather_current_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,8 +43,8 @@
     <ImageView
         android:id="@+id/weather_current_icon"
         android:layout_width="115dp"
-        android:layout_height="83dp"
-        android:layout_margin="@dimen/standard_margin"
+        android:layout_height="115dp"
+        android:layout_marginTop="@dimen/standard_margin"
         android:contentDescription="@string/weather_condition_image"
         android:src="@drawable/ic_storm"
         app:layout_constraintBottom_toTopOf="@+id/current_weather_condition_text_view"
@@ -56,7 +56,7 @@
         android:id="@+id/current_weather_condition_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/standard_margin"
+        android:layout_marginTop="@dimen/standard_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/weather_current_icon"
@@ -68,25 +68,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Refresh"
+        android:text="@string/refresh"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/refresh_button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Refresh"
-        app:layout_constraintEnd_toEndOf="@+id/refresh_button"
-        app:layout_constraintTop_toBottomOf="@+id/refresh_button" />
 
     <Button
         android:id="@+id/daily_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Daily"
+        android:text="@string/daily"
         app:layout_constraintBottom_toBottomOf="@+id/hourly_button"
         app:layout_constraintStart_toStartOf="@+id/vertical_guildline"
         app:layout_constraintTop_toTopOf="@+id/hourly_button" />
@@ -97,8 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-
-        android:text="Hourly"
+        android:text="@string/hourly"
         app:layout_constraintEnd_toStartOf="@+id/vertical_guildline"
         app:layout_constraintTop_toBottomOf="@+id/current_weather_condition_text_view" />
 
@@ -109,25 +99,16 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.50" />
 
-    <TextView
-        android:id="@+id/temp_live_data_string"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:text="Test VM lLiveDataString"
-        app:layout_constraintBottom_toBottomOf="@+id/refresh_button"
-        app:layout_constraintEnd_toStartOf="@+id/refresh_button"
-        app:layout_constraintTop_toTopOf="@+id/refresh_button" />
-
-    <TextView
-        android:id="@+id/temp_live_data_current_weather"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:text="Test current Weather LiveData"
-        app:layout_constraintBottom_toBottomOf="@+id/refresh_button2"
-        app:layout_constraintEnd_toStartOf="@+id/refresh_button2"
-        app:layout_constraintTop_toTopOf="@+id/refresh_button2" />
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container_hourly_and_daily"
+        android:name="com.philipcutting.localweather.HourlyFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/standard_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/daily_button" />
 
     <!-- androidx.fragment.app.FragmentContainerView
         android:id="@+id/five_hour_and_day_fragment_container"

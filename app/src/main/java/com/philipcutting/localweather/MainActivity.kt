@@ -1,11 +1,9 @@
 package com.philipcutting.localweather
 
-
 import android.Manifest
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -13,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.location.*
 import com.philipcutting.localweather.databinding.ActivityMainBinding
 import com.philipcutting.localweather.viewmodels.CurrentWeatherViewModel
-
 
 class MainActivity : AppCompatActivity() {
     private var mFusedLocationClient: FusedLocationProviderClient? = null
@@ -34,17 +31,6 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this)[CurrentWeatherViewModel::class.java]
 
         setContentView(binding.root)
-
-        //TODO: Temp for testing. Delete soon.
-        binding.buttonLocation.text = "test Live String & C.Weather in MainActivity."
-        binding.buttonLocation.setOnClickListener {
-            Log.d(TAG, "button pressed in main activity")
-            viewModel.getCurrentWeather()
-            viewModel.incrementTestString()
-        }
-        binding.tempTestModelView.text = viewModel.testText
-        //TODO: End temp for testing
-
 
        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         locationRequest = LocationRequest.create()
@@ -84,6 +70,9 @@ class MainActivity : AppCompatActivity() {
 //            var location = getCurrentLocation()
 //            binding.locationTextView.text = "Updated : ${ location?.latitude.toString()}  ${location?.longitude.toString()}"
 //        }
+
+
+
     }
 
     //request location
