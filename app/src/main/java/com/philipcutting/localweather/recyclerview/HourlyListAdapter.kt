@@ -1,5 +1,6 @@
  package com.philipcutting.localweather.recyclerview
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -9,7 +10,12 @@ import com.philipcutting.localweather.databinding.HourlyItemBinding
 import com.philipcutting.localweather.models.Hourly
 import com.philipcutting.localweather.recyclerview.HourlyListAdapter.HourlyViewHolder
 
+
+private const val TAG = "HourlyListAdapter"
+
 class HourlyListAdapter : ListAdapter<Hourly?, HourlyViewHolder> (diffUtil){
+
+
 
     companion object {
         private val diffUtil = object : DiffUtil.ItemCallback<Hourly?>() {
@@ -37,7 +43,9 @@ class HourlyListAdapter : ListAdapter<Hourly?, HourlyViewHolder> (diffUtil){
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun onBind(hour: Hourly?){
+            Log.d(TAG, "Hour: ${hour.toString()}")
             binding.apply {
+
                 this.tempTextview.text = hour?.temp.toString()
                 this.descriptionTextview.text = hour?.weather?.description
 

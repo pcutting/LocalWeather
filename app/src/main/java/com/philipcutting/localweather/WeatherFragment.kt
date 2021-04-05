@@ -9,6 +9,11 @@ import com.philipcutting.localweather.databinding.FragmentWeatherBinding
 import com.philipcutting.localweather.models.WeatherConditions
 import com.philipcutting.localweather.viewmodels.CurrentWeatherViewModel
 
+
+//TODO  add swipe to refresh. Reference bellow.
+// https://www.geeksforgeeks.org/how-to-implement-swipe-down-to-refresh-in-android-using-android-studio/
+
+
 class WeatherFragment : Fragment(R.layout.fragment_weather) {
     private val TAG = "WeatherFragment"
 
@@ -29,27 +34,42 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
 
             val currentCondition = WeatherConditions.getConditionFromCode(it?.weather?.id)
             binding.weatherCurrentIcon.setImageResource(currentCondition.getImageResource(it?.dt, it?.temp, it))
+            //Log.d(TAG, "Weather: ${it.toString()}")
+            //Log.d(TAG, "Hour: ${it?.hourly.toString()}")
         }
         viewModel.getCurrentWeather()
 
-        binding.refreshButton.setOnClickListener {
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container_hourly_and_daily, HourFragment())
+            .commit()
 
+        binding.refreshButton.setOnClickListener {
+            refreshWeather()
 
         }
 
         binding.hourlyButton.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_hourly_and_daily, HourlyFragment())
-                    .commit()
+                .replace(R.id.fragment_container_hourly_and_daily, HourFragment())
+                .commit()
         }
 
         binding.dailyButton.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_hourly_and_daily, DailyFragment())
-
+                .replace(R.id.fragment_container_hourly_and_daily, DailyFragment())
+                .commit()
         }
 
+        binding.weatherConstrainLayoutParent.setOnDragListener { v, event ->
+            refreshWeather("onDragEvent ;(v, event)$v , $event")
+            true
+        }
+    }
 
+    private fun refreshWeather(event: String = "No event given"){
+        //TODO Refresh
+        Log.d(TAG, "Refresh requested: $event.")
+        viewModel.getCurrentWeather()
     }
 
 }

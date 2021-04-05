@@ -3,15 +3,12 @@ package com.philipcutting.localweather.viewmodels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.philipcutting.localweather.models.CombinedWeatherReport
+import com.philipcutting.localweather.models.Hourly
 import com.philipcutting.localweather.networking.NetworkOneCallAll
 
 class CurrentWeatherViewModel : ViewModel() {
-    val testText = "test text inside of vm"
-    val currentWeatherReportLiveData = MutableLiveData<CombinedWeatherReport?>()
-    val testStringLiveData =  MutableLiveData<String>()
 
-    // Use the currentWeatherReport held in the Network class.
-    // TODO TODO TODO
+    val currentWeatherReportLiveData = MutableLiveData<CombinedWeatherReport?>()
 
     fun getCurrentWeather() {
         NetworkOneCallAll
@@ -20,10 +17,8 @@ class CurrentWeatherViewModel : ViewModel() {
                 }
     }
 
-    fun incrementTestString(count: Int = 1){
-        if (testStringLiveData.value.isNullOrBlank()) {
-            testStringLiveData.value = "Dots:"
-        }
-        testStringLiveData.value += "*".repeat(count)
+    fun getHourly(): List<Hourly?>? {
+        return currentWeatherReportLiveData.value?.hourly
     }
+
 }

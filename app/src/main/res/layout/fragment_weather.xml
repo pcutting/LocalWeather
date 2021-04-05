@@ -2,10 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constrain_layout_parent"
+    android:id="@+id/weather_constrain_layout_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#009688">
+
+
 
     <TextView
         android:id="@+id/temperature_text_view"
@@ -101,7 +103,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container_hourly_and_daily"
-        android:name="com.philipcutting.localweather.HourlyFragment"
+
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/standard_margin"

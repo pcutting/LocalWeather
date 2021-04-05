@@ -16,6 +16,13 @@ object NetworkOneCallAll {
     private const val TAG = "NetworkOneCallAll"
     private const val APIKey = "56786491fcb4331ffe593f9ff0b28cd1"
 
+
+    // These will limit how much data is processed,  save time, and use it to
+    // make code more efficient while we can't effect how much data the api returns
+    // based off the current api.
+    val hoursReportedLimit = 5
+    val daysReportedLimit = 5
+
     private var testDebugTimeVariableEnteringGetLocalWeather = Instant.now()
     private var testDebugTimeVariableLeavingOnResponse = Instant.now()
 
@@ -44,14 +51,14 @@ object NetworkOneCallAll {
 
     private val oneCallApi : OneCallApi
         get(){
-            Log.d(TAG, "oneCallAPI to weather")
+            //Log.d(TAG, "oneCallAPI to weather")
             val retroBuilder = Retrofit.Builder()
                     .baseUrl("http://api.openweathermap.org/data/2.5/")
                     .client(client.build())
                     .addConverterFactory(MoshiConverterFactory.create())
                     .build()
                     .create(OneCallApi::class.java)
-            Log.d(TAG, "end of oneCallApi")
+            //Log.d(TAG, "end of oneCallApi")
             return retroBuilder
         }
 
@@ -131,8 +138,9 @@ object NetworkOneCallAll {
 
     private fun listOfDailyReports(item : OneCallWeatherItem?): List<Daily?> {
         val listOfDailyReports = mutableListOf<Daily?>()
-        item?.dailyWeather?.forEach {
-            Daily(
+        item?.dailyWeather?.subList(0, daysReportedLimit)?.forEach {
+            listOfDailyReports.add(
+                Daily(
                     dt = WeatherUnit.convertTimeFromEpochInSecondsToLocalDataTimeType(
                             it.dt ?: 0,
                             0),
@@ -165,6 +173,7 @@ object NetworkOneCallAll {
                     degreeWindDirection = it.degreeWindDirection,
                     weather = theWeatherSegment(it.weather?.first()),
                     probabilityOfRain = it.probabilityOfRain,
+                )
             )
         }
         return listOfDailyReports
@@ -172,8 +181,9 @@ object NetworkOneCallAll {
 
     private fun listOfHourlyReports(item : OneCallWeatherItem?): List<Hourly?> {
         val listOfHourlyReports = mutableListOf<Hourly?>()
-        item?.hourlyWeathers?.forEach {
-            Hourly(
+        item?.hourlyWeathers?.subList(0, hoursReportedLimit)?.forEach {
+            listOfHourlyReports.add(
+                Hourly(
                     dt = WeatherUnit.convertTimeFromEpochInSecondsToLocalDataTimeType(
                             it.dt ?: 0,
                             0),
@@ -191,6 +201,7 @@ object NetworkOneCallAll {
 //                    rainVolume = it.rainVolume,
 //                    snowVolume = it.snowVolume,
                     weather = theWeatherSegment(it.weather?.first()),
+                )
             )
         }
         return listOfHourlyReports
