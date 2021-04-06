@@ -16,30 +16,21 @@ import com.philipcutting.localweather.viewmodels.CurrentWeatherViewModel
 class HourFragment: Fragment(R.layout.fragment_hour) {
 
     private val TAG = "HourFragment.kt"
-    private var currentWeather :CombinedWeatherReport? = null
-//    private lateinit var viewModel: CurrentWeatherViewModel
+    //private var currentWeather :CombinedWeatherReport? = null
+    //private lateinit var viewModel: CurrentWeatherViewModel
     private val viewModel: CurrentWeatherViewModel by activityViewModels()
     private val hourlyListAdapter = HourlyListAdapter()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        //super.onViewCreated(view, savedInstanceState)
         val binding = FragmentHourBinding.bind(view)
+
+        binding.testTextview.text = "onViewCreated: Hour fragment"
         //viewModel = ViewModelProvider(this)[CurrentWeatherViewModel::class.java]
         hourlyListAdapter.submitList(viewModel.getHourly())
 
-        Log.d(TAG, "${viewModel.getHourly()}")
-        viewModel.currentWeatherReportLiveData.observe(
-            viewLifecycleOwner,
-            Observer<CombinedWeatherReport?> { it ->
-
-                hourlyListAdapter.submitList(it?.hourly)
-                Log.d(TAG, "Hours(${it?.hourly?.size}): ${it?.hourly?.toString()}")
-
-        })
-
-        viewModel.getCurrentWeather()
-
+        Log.d(TAG, "onViewCreated: ${viewModel.getHourly()}")
 
         binding.hourListRecyclerview.adapter = HourlyListAdapter()
         binding.hourListRecyclerview.layoutManager =
@@ -47,6 +38,23 @@ class HourFragment: Fragment(R.layout.fragment_hour) {
                 view.context,
                 RecyclerView.HORIZONTAL,
                 false)
+
+        hourlyListAdapter.submitList(viewModel.currentWeatherReportLiveData.value?.hourly)
+
+        Log.d(TAG, "onViewCreated: before viewmodel livedata.")
+
+
+        viewModel.currentWeatherReportLiveData.observe(
+            viewLifecycleOwner,
+            Observer<CombinedWeatherReport?> { it ->
+
+                hourlyListAdapter.submitList(it?.hourly)
+                Log.d(TAG, "inside livedata observer: Hours(${it?.hourly?.size}): ${it?.hourly?.toString()}")
+
+            })
+
     }
+
+
 
 }
