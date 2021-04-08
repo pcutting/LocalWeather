@@ -17,8 +17,8 @@ class CurrentWeatherViewModel : ViewModel() {
                 }
     }
 
-    fun getHourly(): List<Hourly?>? {
-        return currentWeatherReportLiveData.value?.hourly
+    fun getHourly(): List<Hourly?> {
+        return currentWeatherReportLiveData.value?.hourly ?: emptyList()
     }
 
 }

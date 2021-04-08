@@ -43,8 +43,13 @@ object NetworkOneCallAll {
 
     var combinedWeatherReport : CombinedWeatherReport? = null
 
+    //High detail logging:
+//    private val logger = HttpLoggingInterceptor()
+//            .setLevel(HttpLoggingInterceptor.Level.BODY )
+
+    //Low detail logging:
     private val logger = HttpLoggingInterceptor()
-            .setLevel(HttpLoggingInterceptor.Level.BODY )
+        .setLevel(HttpLoggingInterceptor.Level.NONE )
 
     private val client = OkHttpClient.Builder()
             .addInterceptor(logger)
@@ -129,8 +134,8 @@ object NetworkOneCallAll {
                     description =  this.currentWeather?.weather?.firstOrNull()?.description,
                     icon =  this.currentWeather?.weather?.firstOrNull()?.icon
                 ),
-                rainVolume = this.currentWeather?.rainVolume,
-                snowVolume = this.currentWeather?.snowVolume,
+//                rainVolume = this.currentWeather?.rainVolume,
+//                snowVolume = this.currentWeather?.snowVolume,
                 hourly =  listOfHourlyReports(this),
                 daily = listOfDailyReports(this)
         )

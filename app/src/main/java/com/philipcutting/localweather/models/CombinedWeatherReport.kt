@@ -23,8 +23,8 @@ data class CombinedWeatherReport(
         val windGust: Double?,
         val degreeWindDirection: Int?,
         val weather: AllWeatherSegment?,
-        val rainVolume: Int?, //In mm metric
-        val snowVolume: Int?, //In mm metric
+//        val rainVolume: Int?, //In mm metric
+//        val snowVolume: Int?, //In mm metric
         val hourly: List<Hourly?>,
         val daily: List<Daily?>,
 )
@@ -51,7 +51,7 @@ data class Hourly(
         val degreeWindDirection: Int?,
         val weather: AllWeatherSegment?,
 //        val rainVolume: Int?, //In mm metric
-//        val snowVolume: Int? //In mm metric
+//        val snowVolume: Int?, //In mm metric
 )
 
 data class Daily(
