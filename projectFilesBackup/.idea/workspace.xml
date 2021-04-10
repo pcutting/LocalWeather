@@ -1,0 +1,640 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5ba1fc65-cb96-4f90-9bbb-0d0567bab30a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/philipcutting/localweather/HourFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/philipcutting/localweather/HourFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/philipcutting/localweather/WeatherFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/philipcutting/localweather/WeatherFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/philipcutting/localweather/models/CombinedWeatherReport.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/philipcutting/localweather/models/CombinedWeatherReport.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/philipcutting/localweather/networking/NetworkOneCallAll.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/philipcutting/localweather/networking/NetworkOneCallAll.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/philipcutting/localweather/networking/OneCallWeatherItem.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/philipcutting/localweather/networking/OneCallWeatherItem.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/philipcutting/localweather/recyclerview/HourlyListAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/philipcutting/localweather/recyclerview/HourlyListAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/philipcutting/localweather/viewmodels/CurrentWeatherViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/philipcutting/localweather/viewmodels/CurrentWeatherViewModel.kt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="DarkyenusTimeTracker">
+    <option name="totalTimeSeconds" value="295778" />
+    <option name="autoCountIdleSeconds" value="60" />
+    <option name="pauseOtherTrackerInstances" value="false" />
+    <option name="naggedAbout" value="1" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[Pixel_2_API_30]" />
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="valueResourceFile" />
+        <option value="Kotlin Enum" />
+        <option value="Kotlin Interface" />
+        <option value="Kotlin Data Class" />
+        <option value="Kotlin Object" />
+        <option value="Class" />
+        <option value="layoutResourceFile" />
+        <option value="Kotlin Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="KotlinCodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1oy2K9pGWZsKB2MwyCutojem5oR" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_2_API_30" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-04-06T12:28:34.898Z" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="android-custom-viewC:/Users/nevie/AppData/Local/Android/Sdk/sources/android-30/android/view/View.java_SELECTED" value="View" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="kotlin" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/layout" />
+    <property name="multi-representation-previewC:/Users/nevie/AppData/Local/Android/Sdk/sources/android-30/android/view/View.java_selected" value="Custom views" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Kotlin" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
+      <recent name="com.philipcutting.localweather" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\nevie\AndroidStudioProjects\LocalWeather\app\src\main\res\layout" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Android App.app">
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BSP.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BSP.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="Local_Weather.app" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NetworkOneCallAllUnitTests.moshi parses data correctly with few test points" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Local_Weather.app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.philipcutting.localweather.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.philipcutting.localweather" />
+      <option name="MAIN_CLASS_NAME" value="com.philipcutting.localweather.NetworkOneCallAllUnitTests" />
+      <option name="METHOD_NAME" value="moshi parses data correctly with few test points" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BSP.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NetworkOneCallAllUnitTests.moshi parses into adapter class correctly correctly with few test points" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Local_Weather.app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.philipcutting.localweather.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.philipcutting.localweather" />
+      <option name="MAIN_CLASS_NAME" value="com.philipcutting.localweather.NetworkOneCallAllUnitTests" />
+      <option name="METHOD_NAME" value="moshi parses into adapter class correctly correctly with few test points" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BSP.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NetworkOneCallAllUnitTests.test url returns code 200 with given string" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Local_Weather.app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.philipcutting.localweather.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.philipcutting.localweather" />
+      <option name="MAIN_CLASS_NAME" value="com.philipcutting.localweather.NetworkOneCallAllUnitTests" />
+      <option name="METHOD_NAME" value="test url returns code 200 with given string" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BSP.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5ba1fc65-cb96-4f90-9bbb-0d0567bab30a" name="Default Changelist" comment="" />
+      <created>1614244442572</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1614244442572</updated>
+    </task>
+    <task id="LOCAL-00001" summary="cleaned up formatting">
+      <created>1614934050346</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1614934050347</updated>
+    </task>
+    <task id="LOCAL-00002" summary="cleaned up formatting">
+      <created>1614935589935</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1614935589935</updated>
+    </task>
+    <task id="LOCAL-00003" summary="cleaned up formatting">
+      <created>1614936292225</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1614936292225</updated>
+    </task>
+    <task id="LOCAL-00004" summary="fixed callball bug">
+      <created>1614966498003</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1614966498003</updated>
+    </task>
+    <task id="LOCAL-00005" summary="error in converting the data (I think) &#10;&#10;```&#10;2021-03-05 22:50:48.665 16919-16919/com.philipcutting.localweather E/AndroidRuntime: FATAL EXCEPTION: main&#10;    Process: com.philipcutting.localweather, PID: 16919&#10;    java.lang.RuntimeException: Unable to start activity ComponentInfo{com.philipcutting.localweather/com.philipcutting.localweather.MainActivity}: java.lang.IllegalArgumentException: Unable to create converter for class com.philipcutting.localweather.networking.CurrentWeatherItem&#10;        for method CurrentWeatherApi.getCurrentWeatherItem&#10;        ```">
+      <created>1614978030624</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1614978030624</updated>
+    </task>
+    <task id="LOCAL-00006" summary="fixed missing apikey">
+      <created>1614979381977</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1614979381977</updated>
+    </task>
+    <task id="LOCAL-00007" summary="java.lang.RuntimeException: Unable to start activity ComponentInfo{com.philipcutting.localweather/com.philipcutting.localweather.MainActivity}: java.lang.IllegalArgumentException: Unable to create converter for class com.philipcutting.localweather.networking.CurrentWeatherItem&#10;        for method CurrentWeatherApi.getCurrentWeatherItem">
+      <created>1615013142431</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1615013142431</updated>
+    </task>
+    <task id="LOCAL-00008" summary="fixed the converter missing issue.">
+      <created>1615019244623</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1615019244623</updated>
+    </task>
+    <task id="LOCAL-00009" summary="url not working?">
+      <created>1615036842694</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1615036842694</updated>
+    </task>
+    <task id="LOCAL-00010" summary="transitioning to mvvm">
+      <created>1615236215728</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1615236215728</updated>
+    </task>
+    <task id="LOCAL-00011" summary="working over one call api.  about to remove a bunch of unused classes.">
+      <created>1615378040612</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1615378040612</updated>
+    </task>
+    <task id="LOCAL-00012" summary="intrim commit">
+      <created>1616880565205</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1616880565205</updated>
+    </task>
+    <task id="LOCAL-00013" summary="testing">
+      <created>1616887076910</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1616887076910</updated>
+    </task>
+    <task id="LOCAL-00014" summary="worked over issue with getting current weather updated in viewModel.">
+      <created>1616965324556</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1616965324556</updated>
+    </task>
+    <task id="LOCAL-00015" summary="cleaned up code span">
+      <created>1616966281733</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1616966281733</updated>
+    </task>
+    <task id="LOCAL-00016" summary="tried cleaning up the lambda for getting weather.">
+      <created>1617017896475</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1617017896475</updated>
+    </task>
+    <task id="LOCAL-00017" summary="tried cleaning up the lambda for getting weather.">
+      <created>1617101486446</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1617101486446</updated>
+    </task>
+    <task id="LOCAL-00018" summary="got current, daily and hourly reporting api going. not going to update network/repository style.">
+      <created>1617272966785</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1617272966785</updated>
+    </task>
+    <task id="LOCAL-00019" summary="cleaned up some.">
+      <created>1617274290192</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1617274290192</updated>
+    </task>
+    <task id="LOCAL-00020" summary="problems with Hourly Fragment.">
+      <created>1617523310559</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1617523310559</updated>
+    </task>
+    <task id="LOCAL-00021" summary="problems with Hourly Fragment.">
+      <created>1617655042561</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1617655042561</updated>
+    </task>
+    <task id="LOCAL-00022" summary="testing">
+      <created>1617713685786</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1617713685786</updated>
+    </task>
+    <task id="LOCAL-00023" summary="viewmodel working better.">
+      <created>1617906520327</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1617906520327</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="cleaned up formatting" />
+    <MESSAGE value="fixed callball bug" />
+    <MESSAGE value="error in converting the data (I think) &#10;&#10;```&#10;2021-03-05 22:50:48.665 16919-16919/com.philipcutting.localweather E/AndroidRuntime: FATAL EXCEPTION: main&#10;    Process: com.philipcutting.localweather, PID: 16919&#10;    java.lang.RuntimeException: Unable to start activity ComponentInfo{com.philipcutting.localweather/com.philipcutting.localweather.MainActivity}: java.lang.IllegalArgumentException: Unable to create converter for class com.philipcutting.localweather.networking.CurrentWeatherItem&#10;        for method CurrentWeatherApi.getCurrentWeatherItem&#10;        ```" />
+    <MESSAGE value="fixed missing apikey" />
+    <MESSAGE value="java.lang.RuntimeException: Unable to start activity ComponentInfo{com.philipcutting.localweather/com.philipcutting.localweather.MainActivity}: java.lang.IllegalArgumentException: Unable to create converter for class com.philipcutting.localweather.networking.CurrentWeatherItem&#10;        for method CurrentWeatherApi.getCurrentWeatherItem" />
+    <MESSAGE value="fixed the converter missing issue." />
+    <MESSAGE value="url not working?" />
+    <MESSAGE value="transitioning to mvvm" />
+    <MESSAGE value="working over one call api.  about to remove a bunch of unused classes." />
+    <MESSAGE value="intrim commit" />
+    <MESSAGE value="worked over issue with getting current weather updated in viewModel." />
+    <MESSAGE value="cleaned up code span" />
+    <MESSAGE value="tried cleaning up the lambda for getting weather." />
+    <MESSAGE value="got current, daily and hourly reporting api going. not going to update network/repository style." />
+    <MESSAGE value="cleaned up some." />
+    <MESSAGE value="problems with Hourly Fragment." />
+    <MESSAGE value="testing" />
+    <MESSAGE value="viewmodel working better." />
+    <option name="LAST_COMMIT_MESSAGE" value="viewmodel working better." />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1170" y="197" key="#Inspections" timestamp="1615987652715">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1170" y="197" key="#Inspections/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615987652715" />
+    <state x="757" y="261" key="#com.intellij.ide.util.MemberChooser" timestamp="1617434909534">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="757" y="261" key="#com.intellij.ide.util.MemberChooser/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1617434909534" />
+    <state x="453" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1616327844192">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="453" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1616327844192" />
+    <state x="689" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1617123905359">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="689" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1617123905359" />
+    <state x="1295" y="310" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog" timestamp="1616016171676">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1295" y="310" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1616016171676" />
+    <state x="277" y="238" width="1521" height="689" key="AVDManager" timestamp="1614582168616">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="277" y="238" width="1521" height="689" key="AVDManager/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1614582168616" />
+    <state x="951" y="134" key="AndroidCreateResourceFileDialog" timestamp="1617530206329">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="951" y="134" key="AndroidCreateResourceFileDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1617530206329" />
+    <state x="803" y="309" key="AndroidCreateXmlResourceDialog" timestamp="1617474796811">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="803" y="309" key="AndroidCreateXmlResourceDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1617474796811" />
+    <state width="797" height="466" key="DebuggerActiveHint" timestamp="1617654870341">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="797" height="466" key="DebuggerActiveHint/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1617654870341" />
+    <state x="739" y="274" key="FileChooserDialogImpl" timestamp="1616156788341">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="739" y="274" key="FileChooserDialogImpl/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1616156788341" />
+    <state x="827" y="417" key="Github.ShareDialog" timestamp="1614932569230">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="827" y="417" key="Github.ShareDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1614932569230" />
+    <state x="676" y="223" key="Github.UntrackedFilesDialog" timestamp="1614932575989">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="676" y="223" key="Github.UntrackedFilesDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1614932575989" />
+    <state width="1837" height="258" key="GridCell.Tab.0.bottom" timestamp="1617894162430">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1837" height="258" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1617894162430" />
+    <state width="1837" height="258" key="GridCell.Tab.0.center" timestamp="1617894162430">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1837" height="258" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1617894162430" />
+    <state width="1837" height="258" key="GridCell.Tab.0.left" timestamp="1617894162430">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1837" height="258" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1617894162430" />
+    <state width="1837" height="258" key="GridCell.Tab.0.right" timestamp="1617894162430">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1837" height="258" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1617894162430" />
+    <state width="1837" height="210" key="GridCell.Tab.1.bottom" timestamp="1617887862600">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1837" height="210" key="GridCell.Tab.1.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1617887862600" />
+    <state width="1837" height="210" key="GridCell.Tab.1.center" timestamp="1617887862600">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1837" height="210" key="GridCell.Tab.1.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1617887862600" />
+    <state width="1837" height="210" key="GridCell.Tab.1.left" timestamp="1617887862600">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1837" height="210" key="GridCell.Tab.1.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1617887862600" />
+    <state width="1837" height="210" key="GridCell.Tab.1.right" timestamp="1617887862600">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1837" height="210" key="GridCell.Tab.1.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1617887862600" />
+    <state x="460" y="161" key="SettingsEditor" timestamp="1617525626121">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="460" y="161" key="SettingsEditor/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1617525626121" />
+    <state width="498" height="454" key="SwitcherDM" timestamp="1614977290798">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="498" height="454" key="SwitcherDM/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1614977290798" />
+    <state x="551" y="252" key="Vcs.Push.Dialog.v2" timestamp="1617906521927">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="551" y="252" key="Vcs.Push.Dialog.v2/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1617906521927" />
+    <state x="768" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1616530786126">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="768" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1616530786126" />
+    <state x="622" y="256" key="run.anything.popup" timestamp="1616530742769">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="622" y="256" key="run.anything.popup/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1616530742769" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1617886390111">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1617886390111" />
+    <state x="789" y="310" key="svn.repositoryBrowser" timestamp="1614932446477">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="789" y="310" key="svn.repositoryBrowser/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1614932446477" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/philipcutting/localweather/recyclerview/HourlyListAdapter.kt</url>
+          <line>34</line>
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/philipcutting/localweather/recyclerview/HourlyListAdapter.kt</url>
+          <line>22</line>
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/philipcutting/localweather/recyclerview/HourlyListAdapter.kt</url>
+          <line>27</line>
+          <option name="timeStamp" value="48" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/philipcutting/localweather/recyclerview/HourlyListAdapter.kt</url>
+          <line>45</line>
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/philipcutting/localweather/recyclerview/HourlyListAdapter.kt</url>
+          <line>54</line>
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/philipcutting/localweather/HourFragment.kt</url>
+          <line>29</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/philipcutting/localweather/HourFragment.kt</url>
+          <line>60</line>
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/philipcutting/localweather/HourFragment.kt</url>
+          <line>49</line>
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/philipcutting/localweather/recyclerview/HourlyListAdapter.kt</url>
+          <line>37</line>
+          <option name="timeStamp" value="54" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/philipcutting/localweather/recyclerview/HourlyListAdapter.kt</url>
+          <line>41</line>
+          <option name="timeStamp" value="57" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-function">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/philipcutting/localweather/recyclerview/HourlyListAdapter.kt</url>
+          <line>16</line>
+          <properties class="com.philipcutting.localweather.recyclerview.HourlyListAdapter" method="&lt;init&gt;" />
+          <option name="timeStamp" value="56" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="JUnit">
+        <watch expression="weatherData" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>
