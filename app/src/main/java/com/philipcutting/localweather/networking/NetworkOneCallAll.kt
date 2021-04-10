@@ -33,6 +33,13 @@ object NetworkOneCallAll {
     private var lat = testLat
     private var lon = testLon
 
+
+
+//    fun setLocation(location: LocationModel) {
+//        lat = location.latitude
+//        lon = location.longitude
+//    }
+
     private val weatherQueryMap = hashMapOf(
             "lon" to lon.toString(),
             "lat" to lat.toString(),
@@ -43,20 +50,16 @@ object NetworkOneCallAll {
 
     var combinedWeatherReport : CombinedWeatherReport? = null
 
-    //High detail logging:
-//    private val logger = HttpLoggingInterceptor()
-//            .setLevel(HttpLoggingInterceptor.Level.BODY )
 
-    //Low detail logging:
+    //Low detail logging: Level.NONE, Max detail: BODY, ...
     private val logger = HttpLoggingInterceptor()
-        .setLevel(HttpLoggingInterceptor.Level.NONE )
+        .setLevel(HttpLoggingInterceptor.Level.BODY )
 
-    private val client = OkHttpClient.Builder()
-            .addInterceptor(logger)
+    private val client = OkHttpClient.Builder().addInterceptor(logger)
 
     private val oneCallApi : OneCallApi
         get(){
-            //Log.d(TAG, "oneCallAPI to weather")
+            Log.d(TAG, "oneCallAPI to weather")
             val retroBuilder = Retrofit.Builder()
                     .baseUrl("http://api.openweathermap.org/data/2.5/")
                     .client(client.build())
@@ -132,29 +135,36 @@ object NetworkOneCallAll {
                     id = this.currentWeather?.weather?.firstOrNull()?.id,
                     mainTitle =  this.currentWeather?.weather?.firstOrNull()?.mainTitle,
                     description =  this.currentWeather?.weather?.firstOrNull()?.description,
-                    icon =  this.currentWeather?.weather?.firstOrNull()?.icon
+                    icon =  this.currentWeather?.weather?.firstOrNull()?.icon,
+                    condition = WeatherConditions.getConditionFromCode(this.currentWeather?.weather?.firstOrNull()?.id)
                 ),
 //                rainVolume = this.currentWeather?.rainVolume,
 //                snowVolume = this.currentWeather?.snowVolume,
-                hourly =  listOfHourlyReports(this),
-                daily = listOfDailyReports(this)
+                hourly =  listOfHourlyReports(this, this.timezoneOffset ?: 0),
+                daily = listOfDailyReports(this, this.timezoneOffset ?: 0)
         )
     }
 
-    private fun listOfDailyReports(item : OneCallWeatherItem?): List<Daily?> {
+    private fun listOfDailyReports(
+        item : OneCallWeatherItem,
+        offset: Int = 0
+    ): List<Daily?> {
         val listOfDailyReports = mutableListOf<Daily?>()
         item?.dailyWeather?.subList(0, daysReportedLimit)?.forEach {
             listOfDailyReports.add(
                 Daily(
                     dt = WeatherUnit.convertTimeFromEpochInSecondsToLocalDataTimeType(
                             it.dt ?: 0,
-                            0),
+                            offset
+                    ),
                     sunRise =  WeatherUnit.convertTimeFromEpochInSecondsToLocalDataTimeType(
                             it.sunRise ?: 0,
-                            0),
+                            offset
+                    ),
                     sunSet =  WeatherUnit.convertTimeFromEpochInSecondsToLocalDataTimeType(
                             it.sunSet ?: 0,
-                            0),
+                            offset
+                    ),
 
                     tempMax = it.temp?.max,
                     tempMin = it.temp?.min,
@@ -184,14 +194,18 @@ object NetworkOneCallAll {
         return listOfDailyReports
     }
 
-    private fun listOfHourlyReports(item : OneCallWeatherItem?): List<Hourly?> {
+    private fun listOfHourlyReports(
+        item : OneCallWeatherItem?,
+        offset: Int = 0
+    ): List<Hourly?> {
         val listOfHourlyReports = mutableListOf<Hourly?>()
         item?.hourlyWeathers?.subList(0, hoursReportedLimit)?.forEach {
             listOfHourlyReports.add(
                 Hourly(
                     dt = WeatherUnit.convertTimeFromEpochInSecondsToLocalDataTimeType(
                             it.dt ?: 0,
-                            0),
+                            offset
+                    ),
                     temp = it.temp,
                     feelsLike = it.feelsLike,
                     pressure = it.pressure,
@@ -220,7 +234,9 @@ object NetworkOneCallAll {
             id = weatherSegment?.id,
             mainTitle = weatherSegment?.mainTitle,
             description = weatherSegment?.description,
-            icon = weatherSegment?.icon
+            icon = weatherSegment?.icon,
+            condition = WeatherConditions.getConditionFromCode(weatherSegment?.id)
+
     )
 
 

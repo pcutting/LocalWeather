@@ -23,8 +23,6 @@ data class CombinedWeatherReport(
         val windGust: Double?,
         val degreeWindDirection: Int?,
         val weather: AllWeatherSegment?,
-//        val rainVolume: Int?, //In mm metric
-//        val snowVolume: Int?, //In mm metric
         val hourly: List<Hourly?>,
         val daily: List<Daily?>,
 )
@@ -33,7 +31,8 @@ data class AllWeatherSegment(
         val id: Int?,
         val mainTitle: String?,
         val description: String?,
-        val icon: String?
+        val icon: String?,
+        val condition: WeatherConditions?,
 )
 
 data class Hourly(
@@ -50,28 +49,22 @@ data class Hourly(
         val windGust: Double?,
         val degreeWindDirection: Int?,
         val weather: AllWeatherSegment?,
-//        val rainVolume: Int?, //In mm metric
-//        val snowVolume: Int?, //In mm metric
 )
 
 data class Daily(
         val dt: LocalDateTime?,
         val sunRise: LocalDateTime?,
         val sunSet: LocalDateTime?,
-//        val temp: Temperature?,
         val tempDay: Double?,
         val tempMin: Double?,
         val tempMax: Double?,
         val tempNight: Double?,
         val tempEvening: Double?,
         val tempMorning: Double?,
-
-//        val feelsLike: FeelsLike?,
         val feelsLikeDay: Double?,
         val feelsLikeNight: Double?,
         val feelsLikeEvening: Double?,
         val feelsLIkeMorning: Double?,
-
         val pressure: Double?,
         val humidity: Int?,
         val dewPoint: Double?,  //dew_point
@@ -81,28 +74,6 @@ data class Daily(
         val windGust: Double?,      //wind_gust
         val degreeWindDirection: Int?,  //wind_deg
         val weather: AllWeatherSegment?,
-
         val probabilityOfRain: Double?, //pop
 )
-//
-//data class Temperature(
-//        val day: Double?,
-//        val min: Double?,
-//        val max: Double?,
-//        val night: Double?,
-//        val evening: Double?,
-//        val morning: Double?
-//)
-//
-
-
-
-
-
-//data class FeelsLike(
-//        val day: Double?,
-//        val night: Double?,
-//        val evening: Double?,
-//        val morning: Double?
-//)
 

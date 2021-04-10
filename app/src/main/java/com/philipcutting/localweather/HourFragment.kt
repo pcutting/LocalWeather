@@ -9,12 +9,9 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.philipcutting.localweather.databinding.FragmentHourBinding
-import com.philipcutting.localweather.models.AllWeatherSegment
 import com.philipcutting.localweather.models.CombinedWeatherReport
-import com.philipcutting.localweather.models.Hourly
 import com.philipcutting.localweather.recyclerview.HourlyListAdapter
 import com.philipcutting.localweather.viewmodels.CurrentWeatherViewModel
-import java.time.LocalDateTime
 
 class HourFragment: Fragment(R.layout.fragment_hour) {
 
@@ -22,17 +19,15 @@ class HourFragment: Fragment(R.layout.fragment_hour) {
     private val viewModel: CurrentWeatherViewModel by activityViewModels()
     //private val hourlyListAdapter = HourlyListAdapter()
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         //super.onViewCreated(view, savedInstanceState)
         val binding = FragmentHourBinding.bind(view)
 
-        binding.testTextview.text = "onViewCreated: Hour fragment"
+
         //viewModel = ViewModelProvider(this)[CurrentWeatherViewModel::class.java]
         //hourlyListAdapter.submitList(viewModel.getHourly())
 
         Log.d(TAG, "onViewCreated: ${viewModel.getHourly()}")
-
 
         binding.hourListRecyclerview.adapter = HourlyListAdapter()
         binding.hourListRecyclerview.layoutManager =
@@ -49,15 +44,13 @@ class HourFragment: Fragment(R.layout.fragment_hour) {
 
         viewModel.currentWeatherReportLiveData.observe(
             viewLifecycleOwner,
-
             Observer<CombinedWeatherReport?> { it ->
-                val testHour1 = Hourly(LocalDateTime.now(),23.1,null,null,null,null,null,null,null,null,null,null, AllWeatherSegment(800,"sunny", "Sunny", "1a"))
-                val testHour2 = Hourly(LocalDateTime.now().plusHours(1),23.6,null,null,null,null,null,null,null,null,null,null, AllWeatherSegment(800,"sunny", "Sunny", "1a"))
-                val testHour3 = Hourly(LocalDateTime.now().plusHours(2),24.1,null,null,null,null,null,null,null,null,null,null, AllWeatherSegment(800,"sunny", "Sunny", "1a"))
+//                val testHour1 = Hourly(LocalDateTime.now(),23.1,null,null,null,null,null,null,null,null,null,null, AllWeatherSegment(800,"sunny", "Sunny", "1a"))
+//                val testHour2 = Hourly(LocalDateTime.now().plusHours(1),23.6,null,null,null,null,null,null,null,null,null,null, AllWeatherSegment(800,"sunny", "Sunny", "1a"))
+//                val testHour3 = Hourly(LocalDateTime.now().plusHours(2),24.1,null,null,null,null,null,null,null,null,null,null, AllWeatherSegment(800,"sunny", "Sunny", "1a"))
 
-                (binding.hourListRecyclerview.adapter as HourlyListAdapter).submitList(it?.hourly ?: listOf(testHour1,testHour2,testHour3))
-                //binding.hourListRecyclerview.submitList(it?.hourly)
-                //hourlyListAdapter.notifyDataSetChanged()
+                (binding.hourListRecyclerview.adapter as HourlyListAdapter).submitList(it?.hourly) // ?: listOf(testHour1,testHour2,testHour3))
+
                 Log.d(TAG, "inside livedata observer:" +
                         " getHourly from vm. ${viewModel.getHourly()}")
                 Log.d(TAG, "inside livedata observer: " +

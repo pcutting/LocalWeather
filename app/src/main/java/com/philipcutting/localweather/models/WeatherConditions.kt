@@ -25,7 +25,7 @@ enum class WeatherConditions(
     fun getImageResource(
         time:LocalDateTime?,
         temperature: Double?,
-        currentWeather: CombinedWeatherReport?
+        currentWeather: CombinedWeatherReport? = null
     ) : Int {
         return when (this) {
             CLOUDY -> getCloudyImage(time, temperature, currentWeather)

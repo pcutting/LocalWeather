@@ -35,8 +35,8 @@ class MainActivity : AppCompatActivity() {
        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         locationRequest = LocationRequest.create()
         locationRequest?.priority = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY
-        locationRequest?.interval = (10 * 1000).toLong() // 10 seconds
-        locationRequest?.fastestInterval = (5 * 1000).toLong() // 5 seconds
+        locationRequest?.interval = (15 *60 * 1000).toLong() // 15 min
+        //locationRequest?.fastestInterval = (1 * 60 * 1000).toLong() // 1 min
 
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult?) {
@@ -55,9 +55,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         //Check user permission at run time
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION),
+        if (ActivityCompat.checkSelfPermission(
+                this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
+            PackageManager.PERMISSION_GRANTED)
+            {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
                     locationRequestCode)
         }
         else

@@ -24,6 +24,7 @@
     <string name="refresh">Refresh</string>
     <string name="daily">Daily</string>
     <string name="hourly">Hourly</string>
+    <string name="location_updating">Location: Updating</string>
 
 
 </resources>

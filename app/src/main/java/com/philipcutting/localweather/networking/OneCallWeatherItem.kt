@@ -5,13 +5,13 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class OneCallWeatherItem(
-        @Json(name = "lat") val latitude:Double?,
-        @Json(name= "lon") val longitude:Double?,
-        @Json(name= "timezone") val timezone: String?,
-        @Json(name= "timezone_offset") val timezoneOffset: Int?,
-        @Json(name= "current") val currentWeather: CurrentWeather?,
-        @Json(name= "hourly") val hourlyWeathers: List<HourlyWeatherItem>?,
-        @Json(name= "daily") val dailyWeather: List<DailyWeatherOneCallItem>?
+    @Json(name = "lat") val latitude:Double?,
+    @Json(name= "lon") val longitude:Double?,
+    @Json(name= "timezone") val timezone: String?,
+    @Json(name= "timezone_offset") val timezoneOffset: Int?,
+    @Json(name= "current") val currentWeather: CurrentWeather?,
+    @Json(name= "hourly") val hourlyWeathers: List<HourlyWeatherItem>?,
+    @Json(name= "daily") val dailyWeather: List<DailyWeatherOneCallItem>?
 )
 
 @JsonClass(generateAdapter = true)
