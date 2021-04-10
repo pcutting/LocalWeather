@@ -1,67 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/daily_weather_item"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:id="@+id/card_view"
+    android:layout_width="100dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/micro_padding"
+    android:clipToPadding="true"
 
-    <ImageView
-        android:id="@+id/weather_image"
-        android:layout_width="86dp"
-        android:layout_height="94dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:contentDescription="@string/weather_description"
-        app:layout_constraintBottom_toTopOf="@+id/description_textview"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_lightning_storm" />
+    app:cardElevation="4dp">
 
-    <TextView
-        android:id="@+id/description_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/temp_textview"
-        app:layout_constraintEnd_toEndOf="@+id/weather_image"
-        app:layout_constraintStart_toStartOf="@+id/weather_image"
-        app:layout_constraintTop_toTopOf="@id/weather_image"
-        tools:layout_editor_absoluteY="113dp"
-        tools:text="Description" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/daily_weather_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/small_margin"
+        >
 
-    <TextView
-        android:id="@+id/temp_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/weather_image"
-        app:layout_constraintStart_toStartOf="@+id/weather_image"
-        app:layout_constraintTop_toBottomOf="@+id/description_textview"
-        tools:text="Max temp" />
+        <TextView
+            android:id="@+id/date_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintBottom_toTopOf="@+id/weather_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textAlignment="center"
+            />
 
-    <TextView
-        android:id="@+id/min_temp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/weather_image"
-        app:layout_constraintHorizontal_bias="0.535"
-        app:layout_constraintStart_toStartOf="@+id/weather_image"
-        app:layout_constraintTop_toBottomOf="@+id/temp_textview"
-        tools:text="min temp" />
+        <ImageView
+            android:id="@+id/weather_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="@string/weather_description"
+            app:layout_constraintBottom_toTopOf="@+id/description_textview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/date_textview"
+            app:srcCompat="@drawable/ic_lightning_storm" />
 
-    <TextView
-        android:id="@+id/prop_of_rain_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/weather_image"
-        app:layout_constraintStart_toStartOf="@+id/weather_image"
-        app:layout_constraintTop_toBottomOf="@+id/min_temp"
-        tools:text="prop of rain" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/description_textview"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:minLines="2"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toTopOf="@id/temp_textview"
+            app:layout_constraintEnd_toEndOf="@+id/weather_image"
+            app:layout_constraintStart_toStartOf="@+id/weather_image"
+            app:layout_constraintTop_toTopOf="@id/weather_image"
+            tools:text="Description" />
+
+        <TextView
+            android:id="@+id/temp_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/weather_image"
+            app:layout_constraintStart_toStartOf="@+id/weather_image"
+            app:layout_constraintTop_toBottomOf="@+id/description_textview"
+            tools:text="Max temp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

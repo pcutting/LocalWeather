@@ -35,10 +35,10 @@ object NetworkOneCallAll {
 
 
 
-//    fun setLocation(location: LocationModel) {
-//        lat = location.latitude
-//        lon = location.longitude
-//    }
+    fun setLocation(location: LocationModel) {
+        lat = location.latitude
+        lon = location.longitude
+    }
 
     private val weatherQueryMap = hashMapOf(
             "lon" to lon.toString(),
@@ -150,7 +150,7 @@ object NetworkOneCallAll {
         offset: Int = 0
     ): List<Daily?> {
         val listOfDailyReports = mutableListOf<Daily?>()
-        item?.dailyWeather?.subList(0, daysReportedLimit)?.forEach {
+        item?.dailyWeather?.subList(1, daysReportedLimit+1)?.forEach {
             listOfDailyReports.add(
                 Daily(
                     dt = WeatherUnit.convertTimeFromEpochInSecondsToLocalDataTimeType(
@@ -199,7 +199,7 @@ object NetworkOneCallAll {
         offset: Int = 0
     ): List<Hourly?> {
         val listOfHourlyReports = mutableListOf<Hourly?>()
-        item?.hourlyWeathers?.subList(0, hoursReportedLimit)?.forEach {
+        item?.hourlyWeathers?.subList(1, hoursReportedLimit+1)?.forEach {
             listOfHourlyReports.add(
                 Hourly(
                     dt = WeatherUnit.convertTimeFromEpochInSecondsToLocalDataTimeType(

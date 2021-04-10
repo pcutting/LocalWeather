@@ -14,15 +14,11 @@ import com.philipcutting.localweather.recyclerview.HourlyListAdapter
 import com.philipcutting.localweather.viewmodels.CurrentWeatherViewModel
 
 class HourFragment: Fragment(R.layout.fragment_hour) {
-
     private val TAG = "HourFragment.kt"
     private val viewModel: CurrentWeatherViewModel by activityViewModels()
-    //private val hourlyListAdapter = HourlyListAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        //super.onViewCreated(view, savedInstanceState)
         val binding = FragmentHourBinding.bind(view)
-
 
         //viewModel = ViewModelProvider(this)[CurrentWeatherViewModel::class.java]
         //hourlyListAdapter.submitList(viewModel.getHourly())
@@ -36,28 +32,21 @@ class HourFragment: Fragment(R.layout.fragment_hour) {
                 RecyclerView.HORIZONTAL,
                 false)
 
-//        hourlyListAdapter.submitList(
-//            viewModel.currentWeatherReportLiveData.value?.hourly)
-
         Log.d(TAG, "onViewCreated: before viewmodel livedata." +
                 " ${viewModel.getHourly()}")
 
         viewModel.currentWeatherReportLiveData.observe(
             viewLifecycleOwner,
             Observer<CombinedWeatherReport?> { it ->
-//                val testHour1 = Hourly(LocalDateTime.now(),23.1,null,null,null,null,null,null,null,null,null,null, AllWeatherSegment(800,"sunny", "Sunny", "1a"))
-//                val testHour2 = Hourly(LocalDateTime.now().plusHours(1),23.6,null,null,null,null,null,null,null,null,null,null, AllWeatherSegment(800,"sunny", "Sunny", "1a"))
-//                val testHour3 = Hourly(LocalDateTime.now().plusHours(2),24.1,null,null,null,null,null,null,null,null,null,null, AllWeatherSegment(800,"sunny", "Sunny", "1a"))
 
-                (binding.hourListRecyclerview.adapter as HourlyListAdapter).submitList(it?.hourly) // ?: listOf(testHour1,testHour2,testHour3))
+                (binding.hourListRecyclerview.adapter as HourlyListAdapter).submitList(it?.hourly)
 
-                Log.d(TAG, "inside livedata observer:" +
-                        " getHourly from vm. ${viewModel.getHourly()}")
-                Log.d(TAG, "inside livedata observer: " +
-                        "Hours(${it?.hourly?.size}): ${it?.hourly?.toString()}")
+//                Log.d(TAG, "inside livedata observer:" +
+//                        " getHourly from vm. ${viewModel.getHourly()}")
+//                Log.d(TAG, "inside livedata observer: " +
+//                        "Hours(${it?.hourly?.size}): ${it?.hourly?.toString()}")
 
             })
-
     }
 
 
