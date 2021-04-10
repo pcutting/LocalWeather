@@ -54,6 +54,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+
+
         //Check user permission at run time
         if (ActivityCompat.checkSelfPermission(
                 this, Manifest.permission.ACCESS_COARSE_LOCATION) !=

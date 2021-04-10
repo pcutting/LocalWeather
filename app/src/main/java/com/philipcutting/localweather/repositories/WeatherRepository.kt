@@ -2,11 +2,14 @@ package com.philipcutting.localweather.repositories
 
 import androidx.lifecycle.MutableLiveData
 import com.philipcutting.localweather.models.CombinedWeatherReport
+import com.philipcutting.localweather.models.LocationModel
 import com.philipcutting.localweather.networking.NetworkOneCallAll
 
 object WeatherRepository {
     // Should this be lateinit instead of nulled?
     private val weatherReport: CombinedWeatherReport? = null
+
+    private lateinit var locationCurrent : LocationModel
 
     val currentWeather = MutableLiveData<CombinedWeatherReport?>()
 
