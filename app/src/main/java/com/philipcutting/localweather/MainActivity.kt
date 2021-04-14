@@ -1,115 +1,111 @@
 package com.philipcutting.localweather
 
 import android.Manifest
-import android.content.pm.PackageManager
-import android.location.Location
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.lifecycle.ViewModelProvider
-import com.google.android.gms.location.*
 import com.philipcutting.localweather.databinding.ActivityMainBinding
-import com.philipcutting.localweather.viewmodels.CurrentWeatherViewModel
+import com.philipcutting.localweather.repositories.WeatherRepository
+import com.philipcutting.localweather.utilities.CurrentLocationComponent
+import com.philipcutting.localweather.utilities.hasPermission
+import com.philipcutting.localweather.utilities.showToast
+
 
 class MainActivity : AppCompatActivity() {
-    private var mFusedLocationClient: FusedLocationProviderClient? = null
-    private var locationRequest: LocationRequest? = null
-    private var mCurrentLocation: Location? = null
-    private var locationCallback: LocationCallback? = null
-    private val locationRequestCode = 1000
 
-    private lateinit var viewModel: CurrentWeatherViewModel
     private lateinit var binding: ActivityMainBinding
 
     private val TAG = "MainActivity"
 
-    override fun onCreate(savedInstanceState: Bundle?)
-    {
+    private lateinit var currentLocationComponent: CurrentLocationComponent
+
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        viewModel = ViewModelProvider(this)[CurrentWeatherViewModel::class.java]
-
         setContentView(binding.root)
 
-       mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        locationRequest = LocationRequest.create()
-        locationRequest?.priority = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY
-        locationRequest?.interval = (15 *60 * 1000).toLong() // 15 min
-        //locationRequest?.fastestInterval = (1 * 60 * 1000).toLong() // 1 min
-
-        locationCallback = object : LocationCallback() {
-            override fun onLocationResult(locationResult: LocationResult?) {
-                if (locationResult == null) {
-                    return
-                }
-                for (location in locationResult.locations) {
-                    if (location != null) {
-                        mCurrentLocation = location
-                        if (mFusedLocationClient != null) {
-                            mFusedLocationClient?.removeLocationUpdates(locationCallback)
-                        }
-                    }
-                }
-            }
-        }
 
 
+        //converted to DataBinding lifecycleOwner
+        
+//        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        //binding.lifecycleOwner = this
 
-        //Check user permission at run time
-        if (ActivityCompat.checkSelfPermission(
-                this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
-            PackageManager.PERMISSION_GRANTED)
+//        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+//        binding.lifecycleOwner = this
+
+
+        currentLocationComponent = CurrentLocationComponent(this,
             {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
-                    locationRequestCode)
+                WeatherRepository.setLocation(it)
+            },
+            {
+                showToast("onCreate: $it")
+            }
+        )
+        lifecycle.addObserver(currentLocationComponent)
+
+        checkLocationPermission()
+    }
+
+
+    private fun checkLocationPermission() {
+        if(hasPermission(Manifest.permission.ACCESS_COARSE_LOCATION)) {
+            getCurrentLocation()
+        } else {
+            locationPermissionLauncher.launch(arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION))
         }
-        else
+    }
+
+    private fun getCurrentLocation() {
+        showToast("Loading location")
+        currentLocationComponent.getCurrentLocation()
+    }
+
+
+    private val locationPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts
+            .RequestMultiplePermissions())
         {
-            requestLocation()
-        }
-
-//        TODO, Testing code. remove soon.
-//        binding.buttonLocation.setOnClickListener {
-//            var location = getCurrentLocation()
-//            binding.locationTextView.text = "Updated : ${ location?.latitude.toString()}  ${location?.longitude.toString()}"
-//        }
-
-
-
-    }
-
-    //request location
-    private fun requestLocation()
-    {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return
-        }
-        mFusedLocationClient?.lastLocation?.addOnSuccessListener(this) { location ->
-            if (location != null) {
-                mCurrentLocation = location
+            if (it.values.contains(false)) {
+                val toast = Toast.makeText(this, "Permission not granted", Toast.LENGTH_LONG)
+                toast.show()
             } else {
-                mFusedLocationClient?.requestLocationUpdates(locationRequest, locationCallback, null)
+                getCurrentLocation()
             }
+        }
+
+    private fun checkShouldShowSettingsDialog() {
+        if(!ActivityCompat.shouldShowRequestPermissionRationale(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION)) {
+            val intent = Intent()
+            intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+            val uri = Uri.fromParts(
+                "package",
+                BuildConfig.APPLICATION_ID,
+                null
+            )
+            intent.data = uri
+            intent.flags= Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+
+            showToast("Allow location permission from settings")
         }
     }
 
-    //on request permission result
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when (requestCode) {
-            1000 -> {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    requestLocation()
-                } else {
-                    Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
 
-    private fun getCurrentLocation(): Location? {
-        return mCurrentLocation ?: null
-    }
+
+
+
+
+
+
+
+
 }

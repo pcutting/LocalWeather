@@ -2,6 +2,7 @@ package com.philipcutting.localweather.networking
 
 import android.util.Log
 import com.philipcutting.localweather.models.*
+import com.philipcutting.localweather.repositories.WeatherRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -73,6 +74,7 @@ object NetworkOneCallAll {
     fun getOneCallWeather(
             onSuccess: (CombinedWeatherReport?) -> Unit
     )  {
+        Log.d(TAG, "getOneCallWeather ${WeatherRepository.getLocation().toString()}")
         testDebugTimeVariableEnteringGetLocalWeather = Instant.now()
 
         oneCallApi
