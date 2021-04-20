@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -14,6 +15,7 @@ import com.google.android.gms.location.*
 import com.philipcutting.localweather.databinding.ActivityMainBinding
 import com.philipcutting.localweather.repositories.WeatherRepository
 import com.philipcutting.localweather.utilities.toScale
+import com.philipcutting.localweather.viewmodels.CurrentWeatherViewModel
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,10 +28,14 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var currentLocation: Location
 
+//    private lateinit var viewModel: CurrentWeatherViewModel by ViewM
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val viewModel : CurrentWeatherViewModel by viewModels()
 
         checkPermissions(this)
 
@@ -58,6 +64,7 @@ class MainActivity : AppCompatActivity() {
                             Log.d(TAG, "onLocationResult $location")
                             Log.d(TAG, "onLocationResult location from repo before: ${WeatherRepository.getLocation()}")
                             WeatherRepository.setLocation(location)
+                            viewModel.getCurrentWeather()
                             Log.d(TAG, "onLocationResult location from repo after update: ${WeatherRepository.getLocation()}")
                             binding.currentLocationTextview.text =
                                 "${location.latitude.toScale(5)}," +

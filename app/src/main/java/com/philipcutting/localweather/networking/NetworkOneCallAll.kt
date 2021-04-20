@@ -1,6 +1,8 @@
 package com.philipcutting.localweather.networking
 
+import android.content.Context
 import android.util.Log
+import com.philipcutting.localweather.R
 import com.philipcutting.localweather.models.*
 import com.philipcutting.localweather.repositories.WeatherRepository
 import okhttp3.OkHttpClient
@@ -30,8 +32,8 @@ object NetworkOneCallAll {
     private const val testLat = 42.694492
     private const val testLon = 23.321964
 
-    private var lat = 0.0
-    private var lon = 0.0
+    private var lat : Double? = null
+    private var lon : Double? = null
 
     fun setLocation(location: LocationModel) {
         lat = location.latitude
@@ -44,18 +46,34 @@ object NetworkOneCallAll {
             lat = WeatherRepository.getLatitude()
             lon = WeatherRepository.getLongitude()
 
-            weatherQueryMap["lon"] = lon.toString()
             weatherQueryMap["lat"] = lat.toString()
+            weatherQueryMap["lon"] = lon.toString()
         }
     }
 
     private val weatherQueryMap = hashMapOf(
-            "lon" to lon.toString(),
-            "lat" to lat.toString(),
-            "units" to "imperial",
-            "exclude" to "minutely,alerts",
-            "appid" to APIKey
+        "lat" to (lat?.toString() ?: "Null"),
+        "lon" to (lon?.toString() ?: "Null"),
+        "units" to "imperial",
+        "exclude" to "minutely,alerts",
+        "appid" to APIKey
     )
+
+    fun getUnits(context:Context): String {
+        return if (weatherQueryMap["units"]== "imperial") {
+            context.getString(R.string.unit_imperial)
+        } else {
+            context.getString(R.string.unit_metric)
+        }
+    }
+
+    fun getWindUnits(context: Context): String {
+        return if (weatherQueryMap["units"]== "imperial") {
+            context.getString( R.string.units_imperial_wind_speed)
+        } else {
+            context.getString(R.string.units_metric_wind_speed)
+        }
+    }
 
     var combinedWeatherReport : CombinedWeatherReport? = null
 
@@ -86,6 +104,10 @@ object NetworkOneCallAll {
         Log.d(TAG, "getOneCallWeather location before updateFromRepo ${WeatherRepository.getLocation()}")
         updateLocationFromRepository()
         Log.d(TAG, "getOneCallWeather location after updateFromRepo ${WeatherRepository.getLocation()}")
+
+        if (WeatherRepository.getLocation()== null) {
+            return
+        }
 
         oneCallApi
                 .getOneCallWeatherItems(weatherQueryMap)

@@ -1,11 +1,14 @@
 package com.philipcutting.localweather
 
+import android.annotation.SuppressLint
+import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.philipcutting.localweather.databinding.FragmentWeatherBinding
 import com.philipcutting.localweather.models.WeatherConditions
+import com.philipcutting.localweather.repositories.WeatherRepository
 import com.philipcutting.localweather.utilities.toScaleWithFormat
 import com.philipcutting.localweather.viewmodels.CurrentWeatherViewModel
 
@@ -18,6 +21,7 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
     private val TAG = "WeatherFragment"
     private val viewModel: CurrentWeatherViewModel by activityViewModels()
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentWeatherBinding.bind(view)
@@ -45,17 +49,19 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
 
 //        Log.d(TAG, "onViewCreated in WeatherFragment viewModel $viewModel")
         viewModel.currentWeatherReportLiveData.observe(viewLifecycleOwner){
+
+            binding.updatedTextView.text = "Updated: " +
+                    it?.dt?.toLocalDate()?.toString() + " @ " +
+                    it?.dt?.toLocalTime()?.toString() +
+                    "\nLocation :${it?.latitude?.toScaleWithFormat(4)}, " +
+                    "${it?.longitude?.toScaleWithFormat(4)}"
+
             binding.currentWeatherConditionTextView.text = it?.weather?.description ?: "Loading Weather"
-            binding.currentWeatherConditionTextView.text = it?.weather?.description ?: "Loading Weather"
-            binding.temperatureTextView.text = it?.temp?.toString() ?: "Loading"
 
             val currentCondition = WeatherConditions.getConditionFromCode(it?.weather?.id)
-            binding.timeTextView.text = it?.dt?.toLocalDate()?.toString() + " @ " + it?.dt?.toLocalTime()?.toString()
             binding.weatherCurrentIcon.setImageResource(currentCondition.getImageResource(it?.dt, it?.temp, it))
-            binding.locationTextview.text = "${it?.latitude?.toScaleWithFormat(4)}, ${it?.longitude?.toScaleWithFormat(4)}"
 
-            //Log.d(TAG, "Weather: ${it.toString()}")
-            //Log.d(TAG, "Hour: ${it?.hourly.toString()}")
+            binding.temperatureTextView.text = "${it?.temp?.toString()} ${WeatherRepository.getUnits(activity as Activity)}"
         }
         viewModel.getCurrentWeather()
 

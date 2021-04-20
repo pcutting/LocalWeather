@@ -8,42 +8,30 @@
     android:background="#009688">
 
 
-
-
     <TextView
-        android:id="@+id/location_textview"
+        android:id="@+id/updated_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/standard_margin"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/time_text_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-
-        android:text="@string/location_updating" />
-
-    <TextView
-        android:id="@+id/time_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/standard_margin"
+        android:maxLines="4"
+        android:minLines="2"
         app:layout_constraintBottom_toTopOf="@+id/weather_current_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/location_textview"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textAlignment="center"
         tools:text="Time" />
 
     <ImageView
         android:id="@+id/weather_current_icon"
-        android:layout_width="115dp"
-        android:layout_height="115dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginTop="@dimen/standard_margin"
         android:contentDescription="@string/weather_condition_image"
         android:src="@drawable/ic_storm"
         app:layout_constraintBottom_toTopOf="@+id/current_weather_condition_text_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/time_text_view" />
+        app:layout_constraintTop_toBottomOf="@id/updated_text_view" />
 
     <TextView
         android:id="@+id/current_weather_condition_text_view"
@@ -115,7 +103,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:clickable="true"
-        app:srcCompat="@drawable/ic_refresh" />
+        app:srcCompat="@drawable/ic_refresh"
+        android:contentDescription="@string/refresh_button"
+        android:focusable="true" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

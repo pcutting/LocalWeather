@@ -1,5 +1,6 @@
 package com.philipcutting.localweather.repositories
 
+import android.content.Context
 import android.location.Location
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -19,6 +20,9 @@ object WeatherRepository {
     private lateinit var locationCurrent: LocationModel
 
     val currentWeather = MutableLiveData<CombinedWeatherReport?>()
+
+    fun getUnits(context: Context) = NetworkOneCallAll.getUnits(context)
+    fun getWindUnits(context: Context) = NetworkOneCallAll.getWindUnits(context)
 
 
     fun getLocationAquiredStatus() = locationHasBeenAquired

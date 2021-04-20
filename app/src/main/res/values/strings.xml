@@ -25,7 +25,20 @@
     <string name="daily">Daily</string>
     <string name="hourly">Hourly</string>
     <string name="location_updating">Location: Updating</string>
-    <string name="acquiring_location">Acquiring location...</string>
+    <string name="acquiring_location">Acquiring location…</string>
+    
+    <string name="unit_imperial">Deg. F</string>
+    <string name="unit_metric">Deg. C</string>
+    <string name="unit_standard">Kalvin</string>
+
+    <string name="unit_imperial_long">Fahrenheit</string>
+    <string name="unit_metric_Long">Celsius</string>
+    <string name="unit_standard_ling">Kalvin</string>
+
+    <string name="units_imperial_wind_speed">Miles/Hour</string>
+    <string name="units_metric_wind_speed">Meters/Second</string>
+    <string name="units_standard_wind_speed">Meters/Second</string>
+    <string name="refresh_button">Refresh Button</string>
 
 
 </resources>
