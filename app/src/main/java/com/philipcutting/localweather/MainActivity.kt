@@ -38,9 +38,10 @@ class MainActivity : AppCompatActivity() {
         )
 
         val request = LocationRequest.create()
+        //Set very short for testing.
         request.apply {
-            interval = 1000
-            fastestInterval = 100
+            interval = 6000  // Should be like 15 min updates, not 6 second.
+            fastestInterval = 1000  //Can't  be faster than 1 min, api restrictions.
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         }
         val permission = ContextCompat.checkSelfPermission(
@@ -55,7 +56,9 @@ class MainActivity : AppCompatActivity() {
                         val location: Location? = locationResult.lastLocation
                         if (location != null) {
                             Log.d(TAG, "onLocationResult $location")
+                            Log.d(TAG, "onLocationResult location from repo before: ${WeatherRepository.getLocation()}")
                             WeatherRepository.setLocation(location)
+                            Log.d(TAG, "onLocationResult location from repo after update: ${WeatherRepository.getLocation()}")
                             binding.currentLocationTextview.text =
                                 "${location.latitude.toScale(5)}," +
                                         " ${location.longitude.toScale(5)}"
@@ -74,7 +77,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         Log.d(TAG, "onCreate, about to call fetchLastLocation()")
-        fetchLastLocation()
+        //fetchLastLocation()
     }
 
     private fun checkPermissions(context: Context) {

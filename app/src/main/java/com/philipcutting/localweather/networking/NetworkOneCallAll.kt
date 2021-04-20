@@ -38,15 +38,16 @@ object NetworkOneCallAll {
         lon = location.longitude
     }
 
-
     private fun updateLocationFromRepository() {
         if (WeatherRepository.getLocation() != null) {
+            Log.d(TAG, "updateLocationFromRepository() getLocation != null")
             lat = WeatherRepository.getLatitude()
             lon = WeatherRepository.getLongitude()
+
+            weatherQueryMap["lon"] = lon.toString()
+            weatherQueryMap["lat"] = lat.toString()
         }
     }
-
-
 
     private val weatherQueryMap = hashMapOf(
             "lon" to lon.toString(),
@@ -82,6 +83,9 @@ object NetworkOneCallAll {
     ){
 //        Log.d(TAG, "getOneCallWeather ${WeatherRepository.getLocation().toString()}")
         testDebugTimeVariableEnteringGetLocalWeather = Instant.now()
+        Log.d(TAG, "getOneCallWeather location before updateFromRepo ${WeatherRepository.getLocation()}")
+        updateLocationFromRepository()
+        Log.d(TAG, "getOneCallWeather location after updateFromRepo ${WeatherRepository.getLocation()}")
 
         oneCallApi
                 .getOneCallWeatherItems(weatherQueryMap)
