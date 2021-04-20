@@ -109,15 +109,7 @@ class MainActivity : AppCompatActivity() {
         val task = fusedLocationClient.lastLocation
         task.addOnSuccessListener { location ->
             if (location != null) currentLocation = location
-            //                Toast.makeText(
-            //                    applicationContext,
-            //                    currentLocation.getLatitude().toString() + "," +
-            //                            currentLocation.getLongitude(),
-            //                    Toast.LENGTH_LONG
-            //                ).show()
             Log.d(TAG, "task OnSuccess $currentLocation")
         }
     }
-
-
 }
