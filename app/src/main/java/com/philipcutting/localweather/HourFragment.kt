@@ -1,7 +1,6 @@
 package com.philipcutting.localweather
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -23,7 +22,7 @@ class HourFragment: Fragment(R.layout.fragment_hour) {
         //viewModel = ViewModelProvider(this)[CurrentWeatherViewModel::class.java]
         //hourlyListAdapter.submitList(viewModel.getHourly())
 
-        Log.d(TAG, "onViewCreated: ${viewModel.getHourly()}")
+        //Log.d(TAG, "onViewCreated: ${viewModel.getHourly()}")
 
         binding.hourListRecyclerview.adapter = HourlyListAdapter()
         binding.hourListRecyclerview.layoutManager =
@@ -32,8 +31,7 @@ class HourFragment: Fragment(R.layout.fragment_hour) {
                 RecyclerView.HORIZONTAL,
                 false)
 
-        Log.d(TAG, "onViewCreated: before viewmodel livedata." +
-                " ${viewModel.getHourly()}")
+        //Log.d(TAG, "onViewCreated: before viewmodel livedata. ${viewModel.getHourly()}")
 
         viewModel.currentWeatherReportLiveData.observe(
             viewLifecycleOwner,

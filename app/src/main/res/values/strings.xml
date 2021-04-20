@@ -25,6 +25,7 @@
     <string name="daily">Daily</string>
     <string name="hourly">Hourly</string>
     <string name="location_updating">Location: Updating</string>
+    <string name="acquiring_location">Acquiring location...</string>
 
 
 </resources>

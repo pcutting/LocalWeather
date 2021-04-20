@@ -1,6 +1,5 @@
  package com.philipcutting.localweather.recyclerview
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -43,11 +42,9 @@ class DailyListAdapter : ListAdapter<Daily, DailyViewHolder> (diffUtil){
     ) : RecyclerView.ViewHolder(dailyBinding.root) {
 
         fun bind(day: Daily){
-            Log.d(TAG, "onBind: Day: $day")
+//            Log.d(TAG, "onBind: Day: $day")
             val timeSetting : LocalDateTime = day.dt ?: LocalDateTime.now()
-
             dailyBinding.apply {
-
                 this.dateTextview.text = day.dt?.toLocalDate()?.dayOfWeek?.toString()?.subSequence(0,3)
                 this.descriptionTextview.text = day.weather?.description
                 this.tempTextview.text =
@@ -57,13 +54,11 @@ class DailyListAdapter : ListAdapter<Daily, DailyViewHolder> (diffUtil){
                         timeSetting,
                         day.tempDay
                 ) ?: 0)
-
             }
         }
         
         private fun reduceDoubleSize(precision: Int, number: Double?) : Double {
             return number?.toBigDecimal()?.setScale(precision, RoundingMode.HALF_UP)?.toDouble() ?: 0.0
-
         }
 
     }

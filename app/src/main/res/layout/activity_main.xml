@@ -7,6 +7,27 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/current_location_textview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/current_time_textclock"
+        android:text="@string/acquiring_location"
+        android:layout_marginStart="@dimen/standard_margin"
+        />
+    <TextClock
+        android:id="@+id/current_time_textclock"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/current_location_textview"
+        android:textAlignment="viewEnd"
+        android:layout_marginEnd="@dimen/standard_margin"
+        />
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/primary_fragment__for_weather_fragments"
         android:name="com.philipcutting.localweather.WeatherFragment"
@@ -16,7 +37,7 @@
         app:layout_constraintEnd_toEndOf="parent"
 
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/current_location_textview" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

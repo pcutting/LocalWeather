@@ -17,7 +17,6 @@ object NetworkOneCallAll {
     private const val TAG = "NetworkOneCallAll"
     private const val APIKey = "56786491fcb4331ffe593f9ff0b28cd1"
 
-
     // These will limit how much data is processed,  save time, and use it to
     // make code more efficient while we can't effect how much data the api returns
     // based off the current api.
@@ -31,15 +30,23 @@ object NetworkOneCallAll {
     private const val testLat = 42.694492
     private const val testLon = 23.321964
 
-    private var lat = testLat
-    private var lon = testLon
-
-
+    private var lat = 0.0
+    private var lon = 0.0
 
     fun setLocation(location: LocationModel) {
         lat = location.latitude
         lon = location.longitude
     }
+
+
+    private fun updateLocationFromRepository() {
+        if (WeatherRepository.getLocation() != null) {
+            lat = WeatherRepository.getLatitude()
+            lon = WeatherRepository.getLongitude()
+        }
+    }
+
+
 
     private val weatherQueryMap = hashMapOf(
             "lon" to lon.toString(),
@@ -51,16 +58,15 @@ object NetworkOneCallAll {
 
     var combinedWeatherReport : CombinedWeatherReport? = null
 
-
     //Low detail logging: Level.NONE, Max detail: BODY, ...
     private val logger = HttpLoggingInterceptor()
-        .setLevel(HttpLoggingInterceptor.Level.BODY )
+        .setLevel(HttpLoggingInterceptor.Level.HEADERS )
 
     private val client = OkHttpClient.Builder().addInterceptor(logger)
 
     private val oneCallApi : OneCallApi
         get(){
-            Log.d(TAG, "oneCallAPI to weather")
+//            Log.d(TAG, "oneCallAPI to weather")
             val retroBuilder = Retrofit.Builder()
                     .baseUrl("http://api.openweathermap.org/data/2.5/")
                     .client(client.build())
@@ -72,9 +78,9 @@ object NetworkOneCallAll {
         }
 
     fun getOneCallWeather(
-            onSuccess: (CombinedWeatherReport?) -> Unit
-    )  {
-        Log.d(TAG, "getOneCallWeather ${WeatherRepository.getLocation().toString()}")
+        onSuccess: (CombinedWeatherReport?) -> Unit
+    ){
+//        Log.d(TAG, "getOneCallWeather ${WeatherRepository.getLocation().toString()}")
         testDebugTimeVariableEnteringGetLocalWeather = Instant.now()
 
         oneCallApi
@@ -92,7 +98,7 @@ object NetworkOneCallAll {
         ) {
             combinedWeatherReport = response.body()?.toCurrent()
             testDebugTimeVariableLeavingOnResponse = Instant.now()
-            Log.d(TAG,"onResponse {Time: ${testDebugTimeVariableLeavingOnResponse.toEpochMilli() - testDebugTimeVariableEnteringGetLocalWeather.toEpochMilli()  } : $combinedWeatherReport")
+//            Log.d(TAG,"onResponse {Time: ${testDebugTimeVariableLeavingOnResponse.toEpochMilli() - testDebugTimeVariableEnteringGetLocalWeather.toEpochMilli()  } : $combinedWeatherReport")
             onSuccess(combinedWeatherReport)
         }
 
@@ -152,7 +158,7 @@ object NetworkOneCallAll {
         offset: Int = 0
     ): List<Daily?> {
         val listOfDailyReports = mutableListOf<Daily?>()
-        item?.dailyWeather?.subList(1, daysReportedLimit+1)?.forEach {
+        item.dailyWeather?.subList(1, daysReportedLimit+1)?.forEach {
             listOfDailyReports.add(
                 Daily(
                     dt = WeatherUnit.convertTimeFromEpochInSecondsToLocalDataTimeType(
