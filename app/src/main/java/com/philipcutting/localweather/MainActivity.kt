@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         request.apply {
             interval = 1000
             fastestInterval = 100
-            priority = LocationRequest.PRIORITY_LOW_POWER
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         }
         val permission = ContextCompat.checkSelfPermission(
             this,
@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         Log.d(TAG, "onCreate, about to call fetchLastLocation()")
-        fetchLastlocation()
+        fetchLastLocation()
     }
 
     private fun checkPermissions(context: Context) {
@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun fetchLastlocation() {
+    private fun fetchLastLocation() {
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_COARSE_LOCATION
@@ -109,7 +109,7 @@ class MainActivity : AppCompatActivity() {
         val task = fusedLocationClient.lastLocation
         task.addOnSuccessListener { location ->
             if (location != null) currentLocation = location
-            Log.d(TAG, "task OnSuccess $currentLocation")
+            Log.d(TAG, "task OnSuccess $location ?: loading...")
         }
     }
 }
