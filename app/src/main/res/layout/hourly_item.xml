@@ -7,14 +7,13 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/micro_padding"
     android:clipToPadding="true"
-
     app:cardElevation="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/hourly_daily_weather"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/small_margin"
+        android:layout_margin="@dimen/small_margin"
         >
 
         <TextView
