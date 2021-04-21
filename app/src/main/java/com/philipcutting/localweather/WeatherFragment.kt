@@ -10,7 +10,6 @@ import androidx.fragment.app.activityViewModels
 import com.philipcutting.localweather.databinding.FragmentWeatherBinding
 import com.philipcutting.localweather.models.WeatherConditions
 import com.philipcutting.localweather.repositories.WeatherRepository
-import com.philipcutting.localweather.utilities.showToast
 import com.philipcutting.localweather.viewmodels.CurrentWeatherViewModel
 
 /** TODO  add swipe to refresh. Reference bellow.
@@ -51,9 +50,9 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
         viewModel.getCurrentWeather()
         binding.fab.setOnClickListener {
             //TODO figure out this.
-            if (viewModel.timeSinceLastUpdateInSeconds() <= 60) {
-                activity?.showToast("Have to wait at least 60 seconds to update.  You have waited ${60-viewModel.timeSinceLastUpdateInSeconds()}")
-            }
+            //            if (viewModel.timeSinceLastUpdateInSeconds() <= 60) {
+            //                activity?.showToast("This has a Bug: Have to wait at least 60 seconds to update.  You have waited ${60-viewModel.timeSinceLastUpdateInSeconds()}")
+            //            }
             refreshWeather(requireContext(),"Fab update")
         }
     }

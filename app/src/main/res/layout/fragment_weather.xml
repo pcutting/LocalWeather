@@ -10,12 +10,12 @@
 
     <ImageView
         android:id="@+id/weather_current_icon"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_marginTop="@dimen/standard_margin"
         android:contentDescription="@string/weather_condition_image"
         android:src="@drawable/ic_storm"
-        app:layout_constraintBottom_toTopOf="@+id/current_weather_condition_text_view"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -30,7 +30,7 @@
         app:layout_constraintBottom_toTopOf="@+id/temperature_text_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/weather_current_icon"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal"
         tools:text="condition description" />
 
     <TextView
@@ -71,6 +71,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.50" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.30"
+        />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container_hourly_and_daily"

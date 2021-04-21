@@ -2,7 +2,10 @@ package com.philipcutting.localweather.models
 
 import androidx.annotation.StringRes
 import com.philipcutting.localweather.R
-import java.time.*
+import java.time.Duration
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
 
 /**
 https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2
@@ -124,8 +127,6 @@ fun isTwilight(time: LocalDateTime?, combinedWeatherReport: CombinedWeatherRepor
     }
 }
 
-//private fun workingTime(time:LocalDateTime?) = time ?: 1200  //TODO make right.
-
 private fun sunRise(combinedWeatherReport: CombinedWeatherReport?) =
     combinedWeatherReport?.sunRise ?: LocalDateTime.of(LocalDate.now(), LocalTime.of(6,30))  // TODO default to 6 am
 
@@ -142,6 +143,3 @@ fun isDay(time: LocalDateTime?, combinedWeatherReport: CombinedWeatherReport?): 
     }
 }
 
-private fun convertTimeFromEpocInSecondsToLocalDataTimeType(fromEpoch: Long, offset: Int): LocalDateTime {
-    return LocalDateTime.ofEpochSecond(fromEpoch, 0, ZoneOffset.ofTotalSeconds(offset))
-}

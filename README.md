@@ -1,6 +1,33 @@
 #Local Weather
 
 
+Some problems: 
+    Updating is funky.  
+    The refresh button doesn't take into account the 60 second delay needed by the api.
+    Change in location services triggers an update in api.
+    Some of the day vs night icon logic might be incorrect.
+    No consideration of long time to pull data and location, can cause errors on some emulators/phones.
+    Need to move location logic out of mainActivity to repository.
+    Repository doesn't hold latest weather data, it's only in the viewModel.
+    Didn't implement coloring for UI, such as day/night/sunset/sunrise...
+    Just plain ugly colors and fonts and buttons.
+    Actual location name not shown.
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Weather Icons from : https://www.flaticon.com/authors/prosymbols
 
 
