@@ -1,5 +1,6 @@
  package com.philipcutting.localweather.recyclerview
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -11,7 +12,7 @@ import com.philipcutting.localweather.recyclerview.DailyListAdapter.DailyViewHol
 import java.math.RoundingMode
 import java.time.LocalDateTime
 
- private const val TAG = "DailyListAdapter"
+private const val TAG = "DailyListAdapter"
 
 class DailyListAdapter : ListAdapter<Daily, DailyViewHolder> (diffUtil){
     companion object {
@@ -42,13 +43,13 @@ class DailyListAdapter : ListAdapter<Daily, DailyViewHolder> (diffUtil){
     ) : RecyclerView.ViewHolder(dailyBinding.root) {
 
         fun bind(day: Daily){
-//            Log.d(TAG, "onBind: Day: $day")
+            Log.d(TAG, "onBind: Day: $day")
             val timeSetting : LocalDateTime = day.dt ?: LocalDateTime.now()
             dailyBinding.apply {
                 this.dateTextview.text = day.dt?.toLocalDate()?.dayOfWeek?.toString()?.subSequence(0,3)
                 this.descriptionTextview.text = day.weather?.description
                 this.tempTextview.text =
-                    "${reduceDoubleSize(1,day.tempMin).toString()} .. ${reduceDoubleSize(1,day.tempMax).toString()}"
+                    "${reduceDoubleSize(1,day.tempMin)} .. ${reduceDoubleSize(1,day.tempMax)}"
                 this.weatherImage.setImageResource(
                     day.weather?.condition?.getImageResource(
                         timeSetting,
@@ -60,6 +61,5 @@ class DailyListAdapter : ListAdapter<Daily, DailyViewHolder> (diffUtil){
         private fun reduceDoubleSize(precision: Int, number: Double?) : Double {
             return number?.toBigDecimal()?.setScale(precision, RoundingMode.HALF_UP)?.toDouble() ?: 0.0
         }
-
     }
 }

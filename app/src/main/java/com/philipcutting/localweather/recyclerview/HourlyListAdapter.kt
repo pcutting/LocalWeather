@@ -27,10 +27,6 @@ class HourlyListAdapter : ListAdapter<Hourly, HourlyViewHolder> (diffUtil){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HourlyViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = HourlyItemBinding.inflate(inflater, parent, false)
-//        return HourlyViewHolder(binding)
-//        val hourLayout = LayoutInflater.from(parent.context)
-//            .inflate(R.layout.hourly_item, parent, false)
-
         return HourlyViewHolder(binding)
     }
 
@@ -39,15 +35,10 @@ class HourlyListAdapter : ListAdapter<Hourly, HourlyViewHolder> (diffUtil){
         holder.bind(hourly)
     }
 
-    class HourlyViewHolder(
-        private val hourlyBinding: HourlyItemBinding
+    class HourlyViewHolder(private val hourlyBinding: HourlyItemBinding
     ) : RecyclerView.ViewHolder(hourlyBinding.root) {
-
         fun bind(hour: Hourly){
-//            Log.d(TAG, "onBind: Hour: $hour")
-
             hourlyBinding.apply {
-
                 this.descriptionTextview.text = hour.weather?.description
                 this.tempTextview.text = hour.temp.toString()
                 this.weatherImage.setImageResource(

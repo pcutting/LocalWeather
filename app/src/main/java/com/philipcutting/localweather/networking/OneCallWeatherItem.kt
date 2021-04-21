@@ -79,9 +79,6 @@ data class DailyWeatherOneCallItem(
     @Json(name= "clouds") val cloudinessPercent: Int?,
     @Json(name= "pop") val probabilityOfRain: Double?,
     @Json(name= "uvi") val uVIndex: Double?,  //UV Index
-
-
-
 )
 
 @JsonClass(generateAdapter = true)
@@ -93,8 +90,6 @@ data class TemperatureItem(
     @Json(name= "eve") val evening: Double?,
     @Json(name= "morn") val morning: Double?
 )
-
-
 
 @JsonClass(generateAdapter = true)
 data class  FeelsLikeItem(

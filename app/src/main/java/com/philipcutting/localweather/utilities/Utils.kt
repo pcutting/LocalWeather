@@ -10,10 +10,8 @@ import androidx.core.app.ActivityCompat
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
-
 fun Location.showCoordinate(precision: Int) = "${this.latitude.toScale(precision)}," +
     " ${this.longitude.toScale(precision)}"
-
 
 fun Context.showToast(message: String) {
     Toast.makeText(this,message, Toast.LENGTH_LONG).show()
@@ -28,7 +26,6 @@ fun Context.hasPermission(permission: String): Boolean {
     return ActivityCompat.checkSelfPermission(this,permission) ==
             PackageManager.PERMISSION_GRANTED
 }
-
 
 //Formatting for displaying to screen.
 private fun Double.toScaleProcessing(precision:Int) =

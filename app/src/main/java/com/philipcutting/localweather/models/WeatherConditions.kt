@@ -6,7 +6,6 @@ import java.time.*
 
 /**
 https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2
-
  */
 
 enum class WeatherConditions(
@@ -121,8 +120,6 @@ fun isTwilight(time: LocalDateTime?, combinedWeatherReport: CombinedWeatherRepor
     return when {
         currentTime.isAfter(sunRise.minus(howLongIsTwilight)) && currentTime.isBefore(sunRise.plusSeconds(1)) -> true
         currentTime.isAfter(sunSet.minusSeconds(1)) && currentTime.isBefore(sunSet.plus(howLongIsTwilight))  -> true
-//        in (sunRise - howLongIsTwilight) until (sunRise) -> true
-//        in (sunSet) until (sunSet + howLongIsTwilight) -> true
         else -> false
     }
 }
@@ -138,7 +135,6 @@ private fun sunSet(combinedWeatherReport: CombinedWeatherReport?) =
 fun isDay(time: LocalDateTime?, combinedWeatherReport: CombinedWeatherReport?): Boolean{
     val workingTime = time ?: LocalDateTime.now()
     return when {
-
         workingTime.isAfter(sunRise(combinedWeatherReport)) && workingTime.isAfter(sunSet(combinedWeatherReport).minusMinutes(1)) -> {
             true
         }
@@ -149,8 +145,3 @@ fun isDay(time: LocalDateTime?, combinedWeatherReport: CombinedWeatherReport?): 
 private fun convertTimeFromEpocInSecondsToLocalDataTimeType(fromEpoch: Long, offset: Int): LocalDateTime {
     return LocalDateTime.ofEpochSecond(fromEpoch, 0, ZoneOffset.ofTotalSeconds(offset))
 }
-
-//private fun getTimeNow(): LocalTime {
-//    //TODO FIX THIS
-//    return LocalDateTime.now()  // get time somehow.
-//}

@@ -1,6 +1,5 @@
 package com.philipcutting.localweather
 
-
 import android.Manifest
 import android.app.Activity
 import android.content.Context
@@ -15,49 +14,32 @@ import com.google.android.gms.location.*
 import com.philipcutting.localweather.databinding.ActivityMainBinding
 import com.philipcutting.localweather.repositories.WeatherRepository
 import com.philipcutting.localweather.utilities.showCoordinate
-import com.philipcutting.localweather.utilities.toScale
 import com.philipcutting.localweather.viewmodels.CurrentWeatherViewModel
 
-
 class MainActivity : AppCompatActivity() {
-
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-
     private lateinit var binding: ActivityMainBinding
-
     private val TAG = "MainActivityLog"
-
     private lateinit var currentLocation: Location
-
     private lateinit var viewModel: CurrentWeatherViewModel
-
     private lateinit var request : LocationRequest
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-//        val viewModel : CurrentWeatherViewModel by viewModels()
-
         viewModel = ViewModelProvider(this).get(CurrentWeatherViewModel::class.java)
-
-
-
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(
             this
         )
-
         request = LocationRequest.create()
         //Set very short for testing.
         request.apply {
-            interval = 90000  // Should be like 15 min updates, not 6 second.
-            fastestInterval = 10000  //Can't  be faster than 1 min, api restrictions.
+            interval = 18000  // Should be like 15 min updates, not 6 second.
+            fastestInterval = 6000  //Can't  be faster than 1 min, api restrictions.
             priority = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY
         }
-
         checkPermissions(this)
-
         if (ActivityCompat.checkSelfPermission(
                 this, Manifest.permission.ACCESS_FINE_LOCATION)
             == PackageManager.PERMISSION_GRANTED &&
@@ -76,23 +58,19 @@ class MainActivity : AppCompatActivity() {
                         Log.d(TAG, "lastLocation didn't have any valid location: $it")
                     }
                 }
-
         } else {
             Log.d(TAG, "permissions have been denied")
             ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION),
+                this, arrayOf(
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION),
                 1
             )
         }
-
-        getRefreshLocationS(this)
-
-        //Log.d(TAG, "onCreate, about to call fetchLastLocation()")
-        //fetchLastLocation()
+        getRefreshLocationService(this)
     }
 
-    fun getRefreshLocationS(context: Context){
+    fun getRefreshLocationService(context: Context){
         if (ActivityCompat.checkSelfPermission(
                 context, Manifest.permission.ACCESS_FINE_LOCATION)
             == PackageManager.PERMISSION_GRANTED &&
@@ -112,8 +90,7 @@ class MainActivity : AppCompatActivity() {
                             binding.currentLocationTextview.text = location.showCoordinate(5)
                         }
                     }
-                },
-                null
+                }, null
             )
         } else {
             Log.d(TAG, "permissions have been denied")
@@ -158,7 +135,6 @@ class MainActivity : AppCompatActivity() {
                 arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
                 1
             )
-//            checkPermissions(context)  //has to be a better way than this to refresh after granting of permissions.
         }
     }
 
@@ -168,20 +144,19 @@ class MainActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-//        startActivity(Intent(this,this.javaClass))
         fetchLastLocation()
     }
 
-
     private fun fetchLastLocation() {
         if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
+                this, Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
+                this, Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED
         ) {
             ActivityCompat.requestPermissions(
                 this,
-                arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
+                arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION),
                 1
             )
             return
@@ -192,8 +167,7 @@ class MainActivity : AppCompatActivity() {
                 currentLocation = location
                 WeatherRepository.setLocation(location)
                 viewModel.getCurrentWeather()
-                binding.currentLocationTextview.text = "${location.latitude.toScale(7)}," +
-                        " ${location.longitude.toScale(7)}"
+                binding.currentLocationTextview.text = location.showCoordinate(7)
             }
             Log.d(TAG, "task OnSuccess $location")
         }
