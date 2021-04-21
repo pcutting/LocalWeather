@@ -3,11 +3,16 @@ package com.philipcutting.localweather.utilities
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.location.Location
 
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import java.math.RoundingMode
 import java.text.DecimalFormat
+
+
+fun Location.showCoordinate(precision: Int) = "${this.latitude.toScale(precision)}," +
+    " ${this.longitude.toScale(precision)}"
 
 
 fun Context.showToast(message: String) {
@@ -18,13 +23,10 @@ fun Context.hasPermission(permission: String): Boolean {
     if (permission == Manifest.permission.ACCESS_COARSE_LOCATION &&
         android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.Q
     ){
-
-    return true
+        return true
     }
-
     return ActivityCompat.checkSelfPermission(this,permission) ==
             PackageManager.PERMISSION_GRANTED
-
 }
 
 

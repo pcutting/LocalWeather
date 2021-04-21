@@ -22,8 +22,8 @@
     <string name="error">Error</string>
     <string name="weather_description">Weather description</string>
     <string name="refresh">Refresh</string>
-    <string name="daily">Daily</string>
-    <string name="hourly">Hourly</string>
+    <string name="daily">Weekly</string>
+    <string name="hourly">Today</string>
     <string name="location_updating">Location: Updating</string>
     <string name="acquiring_location">Acquiring location…</string>
     

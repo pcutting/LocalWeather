@@ -25,6 +25,9 @@ object WeatherRepository {
     fun getWindUnits(context: Context) = NetworkOneCallAll.getWindUnits(context)
 
 
+
+
+
     fun getLocationAquiredStatus() = locationHasBeenAquired
 
     fun setLocation(givenLocation: Location) {

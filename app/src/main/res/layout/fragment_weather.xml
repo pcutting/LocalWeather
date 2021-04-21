@@ -8,40 +8,29 @@
     android:background="#009688">
 
 
-    <TextView
-        android:id="@+id/updated_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:maxLines="4"
-        android:minLines="2"
-        app:layout_constraintBottom_toTopOf="@+id/weather_current_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textAlignment="center"
-        tools:text="Time" />
-
     <ImageView
         android:id="@+id/weather_current_icon"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginTop="@dimen/standard_margin"
         android:contentDescription="@string/weather_condition_image"
         android:src="@drawable/ic_storm"
         app:layout_constraintBottom_toTopOf="@+id/current_weather_condition_text_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/updated_text_view" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/current_weather_condition_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/standard_margin"
+        android:textAllCaps="true"
+        android:textSize="@dimen/standard_font_size"
+        app:layout_constraintBottom_toTopOf="@+id/temperature_text_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/weather_current_icon"
-        app:layout_constraintBottom_toTopOf="@+id/temperature_text_view"
         tools:text="condition description" />
 
     <TextView
@@ -53,13 +42,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/current_weather_condition_text_view"
+        android:textSize="@dimen/header1_font_size"
         tools:text="Temperature" />
 
     <Button
         android:id="@+id/daily_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/standard_margin"
         android:text="@string/daily"
         app:layout_constraintBottom_toBottomOf="@+id/hourly_button"
         app:layout_constraintStart_toStartOf="@+id/vertical_guildline"
@@ -69,8 +59,8 @@
         android:id="@+id/hourly_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:layout_marginEnd="@dimen/standard_margin"
         android:text="@string/hourly"
         app:layout_constraintEnd_toStartOf="@+id/vertical_guildline"
         app:layout_constraintTop_toBottomOf="@+id/temperature_text_view" />
