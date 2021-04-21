@@ -6,7 +6,7 @@
     android:layout_width="100dp"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/micro_padding"
-    android:clipToPadding="true"
+
     app:cardElevation="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,10 +32,10 @@
             android:id="@+id/weather_image"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="@dimen/small_margin"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:layout_marginEnd="@dimen/standard_margin"
+            android:layout_marginBottom="@dimen/standard_margin"
             android:contentDescription="@string/weather_description"
             app:layout_constraintBottom_toTopOf="@+id/description_textview"
             app:layout_constraintEnd_toEndOf="parent"

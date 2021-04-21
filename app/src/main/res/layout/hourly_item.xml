@@ -6,34 +6,32 @@
     android:layout_width="100dp"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/micro_padding"
-    android:clipToPadding="true"
+
     app:cardElevation="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/hourly_daily_weather"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/small_margin"
-        >
+        android:layout_margin="@dimen/small_margin">
 
         <TextView
+            android:id="@+id/time_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/time_textview"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/weather_current_icon"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/weather_image"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:layout_marginEnd="@dimen/standard_margin"
+            android:layout_marginBottom="@dimen/standard_margin"
             android:contentDescription="@string/weather_description"
             app:layout_constraintBottom_toTopOf="@+id/description_textview"
             app:layout_constraintEnd_toEndOf="parent"
@@ -45,19 +43,18 @@
             android:id="@+id/description_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:minLines="2"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textSize="10dp"
             app:layout_constraintBottom_toTopOf="@id/temp_textview"
             app:layout_constraintEnd_toEndOf="@+id/weather_image"
             app:layout_constraintStart_toStartOf="@+id/weather_image"
             app:layout_constraintTop_toTopOf="@id/weather_image"
             tools:layout_editor_absoluteY="113dp"
-            tools:text="Description"
-            android:textAllCaps="true"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:minLines="2"
-            android:textSize="10dp"
-            android:textAlignment="center"
-            />
+            tools:text="Description" />
 
         <TextView
             android:id="@+id/temp_textview"
@@ -67,8 +64,7 @@
             app:layout_constraintEnd_toEndOf="@+id/weather_image"
             app:layout_constraintStart_toStartOf="@+id/weather_image"
             app:layout_constraintTop_toBottomOf="@+id/description_textview"
-            tools:text="Temp"
-            />
+            tools:text="Temp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
